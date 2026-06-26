@@ -37,8 +37,8 @@ class LojTrickPage(BaseModel):
     relative_path: str | None = None
     siteswap: str | None = None
     difficulty: int | None = Field(default=None, ge=1, le=10)
-    prerequisites: list[LojPrerequisite] = Field(default_factory=list)
-    tutorials: list[LojTutorialLink] = Field(default_factory=list)
-    media: list[LojMedia] = Field(default_factory=list)
+    prerequisites: list[LojPrerequisite] = Field(default_factory=lambda: list[LojPrerequisite]())
+    tutorials: list[LojTutorialLink] = Field(default_factory=lambda: list[LojTutorialLink]())
+    media: list[LojMedia] = Field(default_factory=lambda: list[LojMedia]())
     description_text: str | None = None
     description_html: str | None = None

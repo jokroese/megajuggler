@@ -3,9 +3,11 @@ from __future__ import annotations
 import re
 from collections.abc import Iterable
 from pathlib import PurePosixPath
+from typing import cast
 from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup, Tag
+from pydantic import HttpUrl
 
 from megajuggler.sources.loj.models import (
     LojLink,
@@ -49,7 +51,7 @@ def parse_homepage_links(html: str, *, base_url: str = LOJ_BASE_URL) -> list[Loj
                 LojLink(
                     title=clean_text(anchor.get_text(" ", strip=True)),
                     href=href,
-                    url=urljoin(base_url, href),
+                    url=cast(HttpUrl, urljoin(base_url, href)),
                     category=category,
                     object_count=object_count,
                 )
@@ -179,7 +181,8 @@ def parse_media(soup: BeautifulSoup, *, source_url: str) -> list[LojMedia]:
     media: list[LojMedia] = []
     for image in soup.select("img[src]"):
         image_id = image.get("id")
-        classes = set(image.get("class", []))
+        raw_classes = image.get("class")
+        classes = set(raw_classes if isinstance(raw_classes, list) else [])
         if image_id != "jugglinganimation" and "smallanim" not in classes:
             continue
         src = str(image["src"])

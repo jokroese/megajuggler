@@ -1,1 +1,3 @@
 *.svg
+*tricks.json
+packages/megajuggler/tests/fixtures

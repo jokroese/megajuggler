@@ -27,3 +27,7 @@ def interim_loj_dir() -> Path:
 
 def public_data_dir() -> Path:
     return data_dir() / "public"
+
+
+def web_static_data_dir() -> Path:
+    return find_repo_root() / "apps" / "web" / "static" / "data"

@@ -5,6 +5,7 @@ from typing import Annotated
 
 import typer
 
+from megajuggler.export.public_data import build_public_tricks
 from megajuggler.sources.loj.export import parse_cached_homepage, parse_cached_tricks
 from megajuggler.sources.loj.fetch import fetch_all_tricks, fetch_homepage
 
@@ -37,6 +38,10 @@ ForceOption = Annotated[
 DelaySecondsOption = Annotated[
     float,
     typer.Option(help="Delay between trick-page requests."),
+]
+CopyToWebStaticOption = Annotated[
+    bool,
+    typer.Option(help="Copy generated public data into apps/web/static/data."),
 ]
 
 
@@ -88,9 +93,12 @@ def loj_parse(
 
 
 @data_app.command("build")
-def data_build() -> None:
+def data_build(
+    copy_to_web_static: CopyToWebStaticOption = True,
+) -> None:
     """Build validated public JSON data."""
-    typer.echo("TODO: build canonical data/public output from data/interim/loj")
+    output_path = build_public_tricks(copy_to_web_static=copy_to_web_static)
+    typer.echo(f"Wrote {output_path}")
 
 
 @schema_app.command("export")

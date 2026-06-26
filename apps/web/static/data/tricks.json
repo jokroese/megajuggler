@@ -1,0 +1,1568 @@
+[
+  {
+    "id": "423",
+    "title": "423",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/423.html",
+    "object_count": 3,
+    "siteswap": "423",
+    "difficulty": 2,
+    "prerequisites": []
+  },
+  {
+    "id": "cascade",
+    "title": "Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Cascade.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 2,
+    "prerequisites": []
+  },
+  {
+    "id": "fake-columns",
+    "title": "Fake Columns",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/FakeColumns.html",
+    "object_count": 3,
+    "siteswap": "(4,2)",
+    "difficulty": 2,
+    "prerequisites": []
+  },
+  {
+    "id": "jugglers-tennis",
+    "title": "Juggler's Tennis",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/JugglersTennis.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 2,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "oy-oy",
+    "title": "Oy-Oy",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Oy-Oy.html",
+    "object_count": 3,
+    "siteswap": "(4,2)",
+    "difficulty": 2,
+    "prerequisites": ["yo-yo"]
+  },
+  {
+    "id": "the-w",
+    "title": "The W",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/TheW.html",
+    "object_count": 3,
+    "siteswap": "423",
+    "difficulty": 2,
+    "prerequisites": ["423"]
+  },
+  {
+    "id": "yo-yo",
+    "title": "Yo-Yo",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Yo-Yo.html",
+    "object_count": 3,
+    "siteswap": "(4,2)",
+    "difficulty": 2,
+    "prerequisites": ["fake-columns"]
+  },
+  {
+    "id": "columns",
+    "title": "Columns",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Columns.html",
+    "object_count": 3,
+    "siteswap": "(4,4)(4,0)",
+    "difficulty": 3,
+    "prerequisites": []
+  },
+  {
+    "id": "columns-overthrow-variation",
+    "title": "Columns: Overthrow Variation",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ColumnOverVar.html",
+    "object_count": 3,
+    "siteswap": "(4,4)(4x,0)*",
+    "difficulty": 3,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "factory",
+    "title": "Factory",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Factory.html",
+    "object_count": 3,
+    "siteswap": "(2,4)(2,4x)(2x,4)",
+    "difficulty": 3,
+    "prerequisites": ["fake-columns"]
+  },
+  {
+    "id": "fake-mess",
+    "title": "Fake Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/FakeMess.html",
+    "object_count": 3,
+    "siteswap": "423",
+    "difficulty": 3,
+    "prerequisites": ["423"]
+  },
+  {
+    "id": "half-shower",
+    "title": "Half-Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Half-Shower.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 3,
+    "prerequisites": ["cascade", "jugglers-tennis"]
+  },
+  {
+    "id": "infinity",
+    "title": "Infinity",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Infinity.html",
+    "object_count": 3,
+    "siteswap": "(4,4)(4x,0)*",
+    "difficulty": 3,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "rainbow-cross",
+    "title": "Rainbow Cross",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/RainbowArches.html",
+    "object_count": 3,
+    "siteswap": "(4x,4x)(4,0)",
+    "difficulty": 3,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "reverse-infinity",
+    "title": "Reverse Infinity",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ReverseInfinity.html",
+    "object_count": 3,
+    "siteswap": "(4,4)(4x,0)*",
+    "difficulty": 3,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "shuffle-switch",
+    "title": "Shuffle-Switch",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Shuffle-Switch.html",
+    "object_count": 3,
+    "siteswap": "(4,4)(6,0)(2x,2x)",
+    "difficulty": 3,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "441-half-box",
+    "title": "441 (Half-Box)",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Half-Box(441).html",
+    "object_count": 3,
+    "siteswap": "441",
+    "difficulty": 4,
+    "prerequisites": []
+  },
+  {
+    "id": "als-slide",
+    "title": "Al's Slide",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Al'sSlide.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4x)*",
+    "difficulty": 4,
+    "prerequisites": ["infinity"]
+  },
+  {
+    "id": "buffalo-shuffle",
+    "title": "Buffalo Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/BuffaloShuffle.html",
+    "object_count": 3,
+    "siteswap": "2T[32T]32",
+    "difficulty": 4,
+    "prerequisites": ["georgian-shuffle"]
+  },
+  {
+    "id": "burkes-barrage",
+    "title": "Burke's Barrage",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Burke'sBarrage.html",
+    "object_count": 3,
+    "siteswap": "423",
+    "difficulty": 4,
+    "prerequisites": ["takeouts", "fake-mess"]
+  },
+  {
+    "id": "chops",
+    "title": "Chops",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Chops.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "crossed-arm-cascade",
+    "title": "Crossed-Arm Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/CrossedArmCascade.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "crossed-arm-reverse-cascade",
+    "title": "Crossed-Arm Reverse Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/CrossedArmReverseCascade.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["reverse-cascade"]
+  },
+  {
+    "id": "crossunder",
+    "title": "Crossunder",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Crossunder.html",
+    "object_count": 3,
+    "siteswap": "(4x,4x)(4x,0)*",
+    "difficulty": 4,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "davenport-shuffle",
+    "title": "Davenport Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/DavenportShuffle.html",
+    "object_count": 3,
+    "siteswap": "2T[32T]422",
+    "difficulty": 4,
+    "prerequisites": ["georgian-shuffle"]
+  },
+  {
+    "id": "davids-dilemma",
+    "title": "David's Dilemma",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/David'sDilemma.html",
+    "object_count": 3,
+    "siteswap": "(6x,4)(0,2x)",
+    "difficulty": 4,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "follow",
+    "title": "Follow",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Follow.html",
+    "object_count": 3,
+    "siteswap": "423",
+    "difficulty": 4,
+    "prerequisites": ["423"]
+  },
+  {
+    "id": "georgian-shuffle",
+    "title": "Georgian Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/GeorgianShuffle.html",
+    "object_count": 3,
+    "siteswap": "2T[32T]32",
+    "difficulty": 4,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "grace",
+    "title": "Grace",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Grace.html",
+    "object_count": 3,
+    "siteswap": "3[31]2",
+    "difficulty": 4,
+    "prerequisites": ["georgian-shuffle"]
+  },
+  {
+    "id": "half-mess",
+    "title": "Half-Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Half-Mess.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["mills-mess"]
+  },
+  {
+    "id": "hands-of-time",
+    "title": "Hands of Time",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/HandsOfTime.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4x)(4,2)*",
+    "difficulty": 4,
+    "prerequisites": ["shower", "windmill"]
+  },
+  {
+    "id": "high-low-cascade",
+    "title": "High-Low Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/High-LowCascade.html",
+    "object_count": 3,
+    "siteswap": "(4x,2T)*",
+    "difficulty": 4,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "king-of-hearts",
+    "title": "King of Hearts",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/KingofHearts.html",
+    "object_count": 3,
+    "siteswap": "3[34]0332",
+    "difficulty": 4,
+    "prerequisites": ["kingston-shuffle"]
+  },
+  {
+    "id": "kingston-shuffle",
+    "title": "Kingston Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/KingstonShuffle.html",
+    "object_count": 3,
+    "siteswap": "2T[32T]332",
+    "difficulty": 4,
+    "prerequisites": ["georgian-shuffle"]
+  },
+  {
+    "id": "manghams-mangle",
+    "title": "Mangham's Mangle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Mangham'sMangle.html",
+    "object_count": 3,
+    "siteswap": "(4x,4x)(0,4x)(4,2)*",
+    "difficulty": 4,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "mikes-mess",
+    "title": "Mike's Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Mike'sMess.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["crossed-arm-reverse-cascade"]
+  },
+  {
+    "id": "pendulum-drop",
+    "title": "Pendulum Drop",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/PendulumDrop.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(4,2)",
+    "difficulty": 4,
+    "prerequisites": []
+  },
+  {
+    "id": "penmans-pandemonium",
+    "title": "Penman's Pandemonium",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Penman'sPandemonium.html",
+    "object_count": 3,
+    "siteswap": "(4x,2)(4x,2x)*",
+    "difficulty": 4,
+    "prerequisites": ["orkas-mess", "sandbox-shuffle"]
+  },
+  {
+    "id": "reverse-441",
+    "title": "Reverse 441",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Reverse441(Half-Box).html",
+    "object_count": 3,
+    "siteswap": "441",
+    "difficulty": 4,
+    "prerequisites": ["441-half-box"]
+  },
+  {
+    "id": "reverse-cascade",
+    "title": "Reverse Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ReverseCascade.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["half-shower", "jugglers-tennis"]
+  },
+  {
+    "id": "reverse-chops",
+    "title": "Reverse Chops",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ReverseChops.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["chops", "takeouts"]
+  },
+  {
+    "id": "reverse-crossunder",
+    "title": "Reverse Crossunder",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ReverseCrossunder.html",
+    "object_count": 3,
+    "siteswap": "(4x,4x)(4x,0)",
+    "difficulty": 4,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "reverse-factory",
+    "title": "Reverse Factory",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ReverseFactory.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4)(2,4)",
+    "difficulty": 4,
+    "prerequisites": ["factory"]
+  },
+  {
+    "id": "ripleys-rainbow",
+    "title": "Ripley's Rainbow",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Ripley'sRainbow.html",
+    "object_count": 3,
+    "siteswap": "3[34]032",
+    "difficulty": 4,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "rolfs-wave",
+    "title": "Rolf's Wave",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Rolf'sWave.html",
+    "object_count": 3,
+    "siteswap": "2T[32]332",
+    "difficulty": 4,
+    "prerequisites": ["georgian-shuffle", "kingston-shuffle"]
+  },
+  {
+    "id": "shower-cascade",
+    "title": "Shower Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Shower-Cascade.html",
+    "object_count": 3,
+    "siteswap": "51",
+    "difficulty": 4,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "singapore-shuffle",
+    "title": "Singapore Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/SingaporeShuffle.html",
+    "object_count": 3,
+    "siteswap": "2T[32T]422",
+    "difficulty": 4,
+    "prerequisites": ["georgian-shuffle"]
+  },
+  {
+    "id": "snake",
+    "title": "Snake",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Snake.html",
+    "object_count": 3,
+    "siteswap": "50505",
+    "difficulty": 4,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "statue-of-liberty",
+    "title": "Statue of Liberty",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/StatueofLiberty.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 4,
+    "prerequisites": ["half-shower"]
+  },
+  {
+    "id": "takeouts",
+    "title": "Takeouts",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Takeouts.html",
+    "object_count": 3,
+    "siteswap": "423",
+    "difficulty": 4,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "triazzle",
+    "title": "Triazzle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Triazzle.html",
+    "object_count": 3,
+    "siteswap": "(4,2)(4x,2)(4x,2x)*",
+    "difficulty": 4,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "truffle-shuffle",
+    "title": "Truffle Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/TruffleShuffle.html",
+    "object_count": 3,
+    "siteswap": "(6,2)(2x,2x)",
+    "difficulty": 4,
+    "prerequisites": ["shuffle-switch"]
+  },
+  {
+    "id": "weave",
+    "title": "Weave",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Weave.html",
+    "object_count": 3,
+    "siteswap": "432",
+    "difficulty": 4,
+    "prerequisites": ["423", "burkes-barrage"]
+  },
+  {
+    "id": "531",
+    "title": "531",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/531.html",
+    "object_count": 3,
+    "siteswap": "531",
+    "difficulty": 5,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "boston-shuffle",
+    "title": "Boston Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/BostonShuffle.html",
+    "object_count": 3,
+    "siteswap": "52512",
+    "difficulty": 5,
+    "prerequisites": ["cascade", "shuffle"]
+  },
+  {
+    "id": "broken-shower",
+    "title": "Broken Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/BrokenShower.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)",
+    "difficulty": 5,
+    "prerequisites": ["shower", "shower-cascade"]
+  },
+  {
+    "id": "burkes-slam",
+    "title": "Burke's Slam",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Burke'sSlam.html",
+    "object_count": 3,
+    "siteswap": "52512*",
+    "difficulty": 5,
+    "prerequisites": ["boston-shuffle", "takeouts"]
+  },
+  {
+    "id": "charley",
+    "title": "Charley",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Charley.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 5,
+    "prerequisites": ["crossed-arm-cascade", "crossed-arm-reverse-cascade", "mills-mess"]
+  },
+  {
+    "id": "columns-box-variation",
+    "title": "Columns: Box Variation",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ColumnBoxVar.html",
+    "object_count": 3,
+    "siteswap": "(6,6)(2x,0)(0,4)*",
+    "difficulty": 5,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "columns-shower-variation",
+    "title": "Columns: Shower Variation",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ColumnShowVar.html",
+    "object_count": 3,
+    "siteswap": "(6,6)(2x,0)(0,4x)",
+    "difficulty": 5,
+    "prerequisites": ["columns", "shower"]
+  },
+  {
+    "id": "crossed-arm-factory",
+    "title": "Crossed-Arm Factory",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/CrossedArmFactory.html",
+    "object_count": 3,
+    "siteswap": "(4,2)(4,2)(4x,2T)*",
+    "difficulty": 5,
+    "prerequisites": ["factory"]
+  },
+  {
+    "id": "flipped-mess",
+    "title": "Flipped Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/FlippedMess.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 5,
+    "prerequisites": ["mills-mess"]
+  },
+  {
+    "id": "flos-mess",
+    "title": "Flo's Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Flo'sMess.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 5,
+    "prerequisites": ["mills-mess"]
+  },
+  {
+    "id": "flying-disco-drop",
+    "title": "Flying Disco Drop",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/FlyingDiscoDrop.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2T,4x)(4,2)*",
+    "difficulty": 5,
+    "prerequisites": ["shower", "orkas-mess", "hands-of-time"]
+  },
+  {
+    "id": "forklift",
+    "title": "Forklift",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Forklift.html",
+    "object_count": 3,
+    "siteswap": "3[34]03332",
+    "difficulty": 5,
+    "prerequisites": ["georgian-shuffle"]
+  },
+  {
+    "id": "frances",
+    "title": "Frances",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Frances.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4x)(4,2)*",
+    "difficulty": 5,
+    "prerequisites": ["romeos-revenge", "sandbox-shuffle"]
+  },
+  {
+    "id": "georgian-scuffle",
+    "title": "Georgian Scuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/GeorgianScuffle.html",
+    "object_count": 3,
+    "siteswap": "2T[32T]333332",
+    "difficulty": 5,
+    "prerequisites": ["georgian-shuffle", "kraken"]
+  },
+  {
+    "id": "high-low-shower",
+    "title": "High-Low Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/High-LowShower.html",
+    "object_count": 3,
+    "siteswap": "7131",
+    "difficulty": 5,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "icelandic-shuffle",
+    "title": "Icelandic Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/IcelandicShuffle.html",
+    "object_count": 3,
+    "siteswap": "33333342",
+    "difficulty": 5,
+    "prerequisites": ["georgian-scuffle", "kraken"]
+  },
+  {
+    "id": "katos-crux",
+    "title": "Kato's Crux",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Kato'sCrux.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4x)*",
+    "difficulty": 5,
+    "prerequisites": ["sandbox-shuffle"]
+  },
+  {
+    "id": "makas-mess",
+    "title": "Maka's Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Maka'sMess.html",
+    "object_count": 3,
+    "siteswap": "(4,2T)(4x,2)*",
+    "difficulty": 5,
+    "prerequisites": ["crossed-arm-reverse-cascade"]
+  },
+  {
+    "id": "matts-mess",
+    "title": "Matt's Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Matt'sMess.html",
+    "object_count": 3,
+    "siteswap": "(4x,4x)(4x,0)*",
+    "difficulty": 5,
+    "prerequisites": ["reverse-infinity", "crossunder"]
+  },
+  {
+    "id": "mills-mess",
+    "title": "Mills Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/MillsMess.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 5,
+    "prerequisites": ["reverse-cascade"]
+  },
+  {
+    "id": "mills-mess-shower",
+    "title": "Mills Mess Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/MillsMessShower.html",
+    "object_count": 3,
+    "siteswap": "44133",
+    "difficulty": 5,
+    "prerequisites": ["mills-mess", "shower"]
+  },
+  {
+    "id": "nelsons-nemesis",
+    "title": "Nelson's Nemesis",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Nelson'sNemesis.html",
+    "object_count": 3,
+    "siteswap": "(4x,4x)(0,4x)(4,2)*",
+    "difficulty": 5,
+    "prerequisites": ["columns", "rubensteins-revenge"]
+  },
+  {
+    "id": "orinoco-flow",
+    "title": "Orinoco Flow",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/OrinocoFlow.html",
+    "object_count": 3,
+    "siteswap": "42423",
+    "difficulty": 5,
+    "prerequisites": ["weave"]
+  },
+  {
+    "id": "orkas-mess",
+    "title": "Orka's Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Orka'sMess.html",
+    "object_count": 3,
+    "siteswap": "(4,4)(4x,0)(2,4)*",
+    "difficulty": 5,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "peters-shuffle",
+    "title": "Peter's Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Peter'sShuffle.html",
+    "object_count": 3,
+    "siteswap": "52512",
+    "difficulty": 5,
+    "prerequisites": ["chops", "boston-shuffle"]
+  },
+  {
+    "id": "relfs-factory",
+    "title": "Relf's Factory",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Relf'sFactory.html",
+    "object_count": 3,
+    "siteswap": "42333",
+    "difficulty": 5,
+    "prerequisites": ["factory", "manghams-mangle"]
+  },
+  {
+    "id": "relfs-revenge",
+    "title": "Relf's Revenge",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Relf'sRevenge.html",
+    "object_count": 3,
+    "siteswap": "423",
+    "difficulty": 5,
+    "prerequisites": ["follow", "weave"]
+  },
+  {
+    "id": "reverse-mills-mess",
+    "title": "Reverse Mills Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ReverseMillsMess.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 5,
+    "prerequisites": ["mills-mess"]
+  },
+  {
+    "id": "sandbox-shuffle",
+    "title": "Sandbox Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/SandboxShuffle.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4x)(4,2)*",
+    "difficulty": 5,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "shower",
+    "title": "Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Shower.html",
+    "object_count": 3,
+    "siteswap": "51",
+    "difficulty": 5,
+    "prerequisites": ["half-shower", "441-half-box"]
+  },
+  {
+    "id": "shower-swap-variation",
+    "title": "Shower: Swap Variation",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ShowerSwapVariation.html",
+    "object_count": 3,
+    "siteswap": "(6x,2x)(2x,2x)",
+    "difficulty": 5,
+    "prerequisites": ["shower", "shuffle-switch"]
+  },
+  {
+    "id": "shufflers-mess",
+    "title": "Shuffler's Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Shuffler'sMess.html",
+    "object_count": 3,
+    "siteswap": "53133",
+    "difficulty": 5,
+    "prerequisites": ["531", "mills-mess", "531-mills-mess"]
+  },
+  {
+    "id": "symmetric-georgian-shuffle",
+    "title": "Symmetric Georgian Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/SymmetricGeorgianShuffle.html",
+    "object_count": 3,
+    "siteswap": "3[34]032",
+    "difficulty": 5,
+    "prerequisites": ["georgian-shuffle"]
+  },
+  {
+    "id": "toms-trick",
+    "title": "Tom's Trick",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Tom'sTrick.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4x)(4x,2)(2,4x)*",
+    "difficulty": 5,
+    "prerequisites": ["chops", "boston-shuffle"]
+  },
+  {
+    "id": "underarm-shower",
+    "title": "Underarm Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/UnderarmShower.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)",
+    "difficulty": 5,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "windmill",
+    "title": "Windmill",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Windmill.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 5,
+    "prerequisites": ["reverse-cascade", "mills-mess"]
+  },
+  {
+    "id": "441-mills-mess",
+    "title": "441 Mills Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/441MillsMess.html",
+    "object_count": 3,
+    "siteswap": "441",
+    "difficulty": 6,
+    "prerequisites": ["reverse-441", "mills-mess"]
+  },
+  {
+    "id": "531-mills-mess",
+    "title": "531 Mills Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/531MillsMess.html",
+    "object_count": 3,
+    "siteswap": "531",
+    "difficulty": 6,
+    "prerequisites": ["531", "mills-mess"]
+  },
+  {
+    "id": "arrow-of-asai",
+    "title": "Arrow of Asai",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ArrowofAsai.html",
+    "object_count": 3,
+    "siteswap": "[35]1231",
+    "difficulty": 6,
+    "prerequisites": ["shuffle", "penmans-box"]
+  },
+  {
+    "id": "boston-mess",
+    "title": "Boston Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/BostonMess.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 6,
+    "prerequisites": ["mills-mess", "the-w"]
+  },
+  {
+    "id": "box",
+    "title": "Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Box.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(2x,4)",
+    "difficulty": 6,
+    "prerequisites": ["441-half-box", "shower"]
+  },
+  {
+    "id": "broken-box",
+    "title": "Broken Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/BrokenBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)*",
+    "difficulty": 6,
+    "prerequisites": ["box", "burst-box"]
+  },
+  {
+    "id": "burst-box",
+    "title": "Burst Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/BurstBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(2x,4x)(2x,4x)*",
+    "difficulty": 6,
+    "prerequisites": ["broken-box", "gilligans-box"]
+  },
+  {
+    "id": "cherry-picker",
+    "title": "Cherry Picker",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/CherryPicker.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 6,
+    "prerequisites": ["boston-mess"]
+  },
+  {
+    "id": "chop-shower",
+    "title": "Chop Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ChopShower.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 6,
+    "prerequisites": ["windmill", "crossed-arm-reverse-cascade"]
+  },
+  {
+    "id": "compressed-olas",
+    "title": "Compressed Olas",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/CompressedOlas.html",
+    "object_count": 3,
+    "siteswap": "[31]23",
+    "difficulty": 6,
+    "prerequisites": ["olas"]
+  },
+  {
+    "id": "extended-box",
+    "title": "Extended Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ExtendedBox.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(4,2x)*",
+    "difficulty": 6,
+    "prerequisites": ["box"]
+  },
+  {
+    "id": "frantic-cascade",
+    "title": "Frantic Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/FranticCascade.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 6,
+    "prerequisites": ["crossed-arm-cascade"]
+  },
+  {
+    "id": "frostbite",
+    "title": "Frostbite",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Frostbite.html",
+    "object_count": 3,
+    "siteswap": "44133",
+    "difficulty": 6,
+    "prerequisites": ["reverse-441"]
+  },
+  {
+    "id": "gilligans-box",
+    "title": "Gilligan's Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Gilligan'sBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(4,2)(2x,4x)*",
+    "difficulty": 6,
+    "prerequisites": ["broken-box"]
+  },
+  {
+    "id": "harrisons-hang",
+    "title": "Harrison's Hang",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Harrison'sHang.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(4,2)*",
+    "difficulty": 6,
+    "prerequisites": ["penmans-pandemonium"]
+  },
+  {
+    "id": "jeanne",
+    "title": "Jeanne",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Jeanne.html",
+    "object_count": 3,
+    "siteswap": "(4,4)(4x,0)(2,4x)(4x,2)*",
+    "difficulty": 6,
+    "prerequisites": ["rubensteins-revenge"]
+  },
+  {
+    "id": "kraken",
+    "title": "Kraken",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Kraken.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 6,
+    "prerequisites": ["mills-mess", "cherry-picker"]
+  },
+  {
+    "id": "lukes-lobotomy",
+    "title": "Luke's Lobotomy",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Luke'sLobotomy.html",
+    "object_count": 3,
+    "siteswap": "(4x,2T)*",
+    "difficulty": 6,
+    "prerequisites": ["crossed-arm-reverse-cascade", "buffalo-shuffle"]
+  },
+  {
+    "id": "mardens-marvel",
+    "title": "Marden's Marvel",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Marden'sMarvel.html",
+    "object_count": 3,
+    "siteswap": "42333",
+    "difficulty": 6,
+    "prerequisites": ["rubensteins-revenge", "windmill"]
+  },
+  {
+    "id": "olas",
+    "title": "Olas",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Olas.html",
+    "object_count": 3,
+    "siteswap": "3323[13]",
+    "difficulty": 6,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "penmans-box",
+    "title": "Penman's Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Penman'sBox.html",
+    "object_count": 3,
+    "siteswap": "(4x,2)(4x,2x)*",
+    "difficulty": 6,
+    "prerequisites": ["box", "penmans-pandemonium"]
+  },
+  {
+    "id": "relfs-revenge-6",
+    "title": "Relf's Revenge 6",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Relf'sRevenge6.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 6,
+    "prerequisites": ["rubensteins-revenge"]
+  },
+  {
+    "id": "relfs-rubensteins",
+    "title": "Relf's Rubensteins",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Relf'sRubensteins.html",
+    "object_count": 3,
+    "siteswap": "5224233",
+    "difficulty": 6,
+    "prerequisites": ["rubensteins-revenge", "romeos-revenge"]
+  },
+  {
+    "id": "romeos-revenge",
+    "title": "Romeo's Revenge",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Romeo'sRevenge.html",
+    "object_count": 3,
+    "siteswap": "52233",
+    "difficulty": 6,
+    "prerequisites": ["rubensteins-revenge"]
+  },
+  {
+    "id": "rubensteins-revenge",
+    "title": "Rubenstein's Revenge",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Rubenstein'sRevenge.html",
+    "object_count": 3,
+    "siteswap": "52233",
+    "difficulty": 6,
+    "prerequisites": ["mills-mess"]
+  },
+  {
+    "id": "swap-box",
+    "title": "Swap Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/SwapBox.html",
+    "object_count": 3,
+    "siteswap": "(6,2x)(2x,2x)*",
+    "difficulty": 6,
+    "prerequisites": ["box", "shuffle-switch"]
+  },
+  {
+    "id": "switched-box",
+    "title": "Switched Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/SwitchedBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)*",
+    "difficulty": 6,
+    "prerequisites": ["box"]
+  },
+  {
+    "id": "symmetric-georgian-scuffle",
+    "title": "Symmetric Georgian Scuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/SymmetricGeorgianScuffle.html",
+    "object_count": 3,
+    "siteswap": "2T[32T]3333332",
+    "difficulty": 6,
+    "prerequisites": ["georgian-scuffle", "kraken"]
+  },
+  {
+    "id": "takearound",
+    "title": "Takearound",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Takearound.html",
+    "object_count": 3,
+    "siteswap": "42342T3",
+    "difficulty": 6,
+    "prerequisites": ["takeouts", "flying-disco-drop"]
+  },
+  {
+    "id": "threaded-box",
+    "title": "Threaded Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ThreadedBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)*",
+    "difficulty": 6,
+    "prerequisites": ["box"]
+  },
+  {
+    "id": "underarm-box",
+    "title": "Underarm Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/UnderarmBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(2x,4x)*",
+    "difficulty": 6,
+    "prerequisites": ["box"]
+  },
+  {
+    "id": "zebra-factory",
+    "title": "Zebra Factory",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ZebraFactory.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2,4x)(2x,4)",
+    "difficulty": 6,
+    "prerequisites": ["factory", "n-box"]
+  },
+  {
+    "id": "alex",
+    "title": "Alex",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Alex.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2T,4x)*",
+    "difficulty": 7,
+    "prerequisites": ["531-mills-mess"]
+  },
+  {
+    "id": "backcrosses",
+    "title": "Backcrosses",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Backcrosses.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 7,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "bizarre-box",
+    "title": "Bizarre Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/BizarreBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2T)(4x,2)(4x,2x)*",
+    "difficulty": 7,
+    "prerequisites": ["box"]
+  },
+  {
+    "id": "crossed-arm-shower",
+    "title": "Crossed-Arm Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/CrossedArmShower.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)",
+    "difficulty": 7,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "inverted-box",
+    "title": "Inverted Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/InvertedBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(2x,4)",
+    "difficulty": 7,
+    "prerequisites": ["n-box", "lukes-shuffle"]
+  },
+  {
+    "id": "karass-box",
+    "title": "Karas's Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Karas'Box.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(2T,4)(2T,4x)*",
+    "difficulty": 7,
+    "prerequisites": ["bizarre-box"]
+  },
+  {
+    "id": "levels",
+    "title": "Levels",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Levels.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)(4,2x)*",
+    "difficulty": 7,
+    "prerequisites": ["n-box", "lukes-shuffle"]
+  },
+  {
+    "id": "low-shuffle",
+    "title": "Low Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/LowShuffle.html",
+    "object_count": 3,
+    "siteswap": "51",
+    "difficulty": 7,
+    "prerequisites": ["shuffle"]
+  },
+  {
+    "id": "lukes-shuffle",
+    "title": "Luke's Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Luke'sShuffle.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(2x,4)",
+    "difficulty": 7,
+    "prerequisites": ["box", "shuffle"]
+  },
+  {
+    "id": "n-box",
+    "title": "N-Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/N-Box.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)(2x,4)",
+    "difficulty": 7,
+    "prerequisites": ["box", "shuffle"]
+  },
+  {
+    "id": "reverse-crossed-arm-shower",
+    "title": "Reverse Crossed-Arm Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ReverseCrossedArmShower.html",
+    "object_count": 3,
+    "siteswap": "(4x,2x)",
+    "difficulty": 7,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "shuffle",
+    "title": "Shuffle",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/Shuffle.html",
+    "object_count": 3,
+    "siteswap": "51",
+    "difficulty": 7,
+    "prerequisites": ["shower", "box"]
+  },
+  {
+    "id": "three-in-one",
+    "title": "Three In One",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/ThreeInOne.html",
+    "object_count": 3,
+    "siteswap": "60",
+    "difficulty": 7,
+    "prerequisites": []
+  },
+  {
+    "id": "true-box",
+    "title": "True Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/TrueBox.html",
+    "object_count": 3,
+    "siteswap": "(4,2x)*",
+    "difficulty": 7,
+    "prerequisites": ["box", "inverted-shower"]
+  },
+  {
+    "id": "inverted-shower",
+    "title": "Inverted Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/3balltricks/InvertedShower.html",
+    "object_count": 3,
+    "siteswap": "3",
+    "difficulty": 8,
+    "prerequisites": ["factory"]
+  },
+  {
+    "id": "552",
+    "title": "552",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/552.html",
+    "object_count": 4,
+    "siteswap": "552",
+    "difficulty": 4,
+    "prerequisites": ["cascade", "snake"]
+  },
+  {
+    "id": "5551",
+    "title": "5551",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/5551.html",
+    "object_count": 4,
+    "siteswap": "5551",
+    "difficulty": 5,
+    "prerequisites": ["cascade", "shower"]
+  },
+  {
+    "id": "55550",
+    "title": "55550",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/55550.html",
+    "object_count": 4,
+    "siteswap": "55550",
+    "difficulty": 5,
+    "prerequisites": ["5551"]
+  },
+  {
+    "id": "four-ball-columns",
+    "title": "Four Ball Columns",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallColumns.html",
+    "object_count": 4,
+    "siteswap": "(4,4)",
+    "difficulty": 5,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "four-ball-takeouts",
+    "title": "Four Ball Takeouts",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallTakeouts.html",
+    "object_count": 4,
+    "siteswap": "[43]23",
+    "difficulty": 5,
+    "prerequisites": ["takeouts", "cliffs-confusion"]
+  },
+  {
+    "id": "lisa",
+    "title": "Lisa",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Lisa.html",
+    "object_count": 4,
+    "siteswap": "(4,2)(2x,[4x4])*",
+    "difficulty": 5,
+    "prerequisites": ["four-ball-columns"]
+  },
+  {
+    "id": "wimpy",
+    "title": "Wimpy",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Wimpy.html",
+    "object_count": 4,
+    "siteswap": "(4x,4x)",
+    "difficulty": 5,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "cliffs-confusion",
+    "title": "Cliff's Confusion",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Cliff'sConfusion.html",
+    "object_count": 4,
+    "siteswap": "3[43]2",
+    "difficulty": 6,
+    "prerequisites": ["mills-mess"]
+  },
+  {
+    "id": "danceys-devilment",
+    "title": "Dancey's Devilment",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Dancey'sDevilment.html",
+    "object_count": 4,
+    "siteswap": "3[51][22]2[32]",
+    "difficulty": 6,
+    "prerequisites": ["rubensteins-revenge"]
+  },
+  {
+    "id": "four-ball-half-shower",
+    "title": "Four Ball Half-Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallHalfShower.html",
+    "object_count": 4,
+    "siteswap": null,
+    "difficulty": 6,
+    "prerequisites": ["half-shower", "wimpy"]
+  },
+  {
+    "id": "four-ball-rainbow-cross",
+    "title": "Four Ball Rainbow Cross",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallRainbowCross.html",
+    "object_count": 4,
+    "siteswap": "(4,4)(4x,4x)",
+    "difficulty": 6,
+    "prerequisites": ["four-ball-columns", "rainbow-cross"]
+  },
+  {
+    "id": "synchronous-pistons",
+    "title": "Synchronous Pistons",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/SynchPistons.html",
+    "object_count": 4,
+    "siteswap": "(4,4)",
+    "difficulty": 6,
+    "prerequisites": ["four-ball-columns"]
+  },
+  {
+    "id": "tennessee-waltz",
+    "title": "Tennessee Waltz",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/TennesseeWaltz.html",
+    "object_count": 4,
+    "siteswap": "3[32T]",
+    "difficulty": 6,
+    "prerequisites": ["cascade", "cliffs-confusion"]
+  },
+  {
+    "id": "534",
+    "title": "534",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/534.html",
+    "object_count": 4,
+    "siteswap": "534",
+    "difficulty": 7,
+    "prerequisites": ["531", "fountain"]
+  },
+  {
+    "id": "arches",
+    "title": "Arches",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Arches.html",
+    "object_count": 4,
+    "siteswap": "(4x,4x)",
+    "difficulty": 7,
+    "prerequisites": ["four-ball-half-shower"]
+  },
+  {
+    "id": "fountain",
+    "title": "Fountain",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Fountain.html",
+    "object_count": 4,
+    "siteswap": "4",
+    "difficulty": 7,
+    "prerequisites": []
+  },
+  {
+    "id": "four-ball-box",
+    "title": "Four Ball Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallBox.html",
+    "object_count": 4,
+    "siteswap": "(6,2x)(6,2x)*",
+    "difficulty": 7,
+    "prerequisites": ["box", "sprung-cascade"]
+  },
+  {
+    "id": "four-ball-half-mess",
+    "title": "Four Ball Half-Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallHalf-Mess.html",
+    "object_count": 4,
+    "siteswap": "4",
+    "difficulty": 7,
+    "prerequisites": ["half-mess", "four-ball-mills-mess"]
+  },
+  {
+    "id": "four-ball-shower",
+    "title": "Four Ball Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallShower.html",
+    "object_count": 4,
+    "siteswap": "71",
+    "difficulty": 7,
+    "prerequisites": ["shower"]
+  },
+  {
+    "id": "four-ball-stacked-box",
+    "title": "Four Ball Stacked Box",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallStackedBox.html",
+    "object_count": 4,
+    "siteswap": "(8,2x)(4,2x)*",
+    "difficulty": 7,
+    "prerequisites": ["box", "high-low-shower"]
+  },
+  {
+    "id": "four-ball-windmill",
+    "title": "Four Ball Windmill",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallWindmill.html",
+    "object_count": 4,
+    "siteswap": "4",
+    "difficulty": 7,
+    "prerequisites": ["windmill", "fountain", "four-ball-mills-mess"]
+  },
+  {
+    "id": "pistons",
+    "title": "Pistons",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Pistons.html",
+    "object_count": 4,
+    "siteswap": "4",
+    "difficulty": 7,
+    "prerequisites": ["fountain"]
+  },
+  {
+    "id": "reverse-fountain",
+    "title": "Reverse Fountain",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/ReverseFountain.html",
+    "object_count": 4,
+    "siteswap": "4",
+    "difficulty": 7,
+    "prerequisites": ["fountain"]
+  },
+  {
+    "id": "reverse-synchronous-fountain",
+    "title": "Reverse Synchronous Fountain",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/ReverseSynchFountain.html",
+    "object_count": 4,
+    "siteswap": "(4,4)",
+    "difficulty": 7,
+    "prerequisites": ["synchronous-fountain"]
+  },
+  {
+    "id": "synchronous-fountain",
+    "title": "Synchronous Fountain",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/SynchFountain.html",
+    "object_count": 4,
+    "siteswap": "(4,4)",
+    "difficulty": 7,
+    "prerequisites": ["fountain"]
+  },
+  {
+    "id": "tsunami",
+    "title": "Tsunami",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/Tsunami.html",
+    "object_count": 4,
+    "siteswap": "72416",
+    "difficulty": 7,
+    "prerequisites": ["four-ball-mills-mess"]
+  },
+  {
+    "id": "534-mills-mess",
+    "title": "534 Mills Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/534MillsMess.html",
+    "object_count": 4,
+    "siteswap": "534",
+    "difficulty": 8,
+    "prerequisites": ["four-ball-mills-mess", "534", "531-mills-mess"]
+  },
+  {
+    "id": "four-ball-mills-mess",
+    "title": "Four Ball Mills Mess",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/FourBallMillsMess.html",
+    "object_count": 4,
+    "siteswap": "4",
+    "difficulty": 8,
+    "prerequisites": ["mills-mess", "reverse-fountain"]
+  },
+  {
+    "id": "sprung-cascade",
+    "title": "Sprung Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/4balltricks/SprungCascade.html",
+    "object_count": 4,
+    "siteswap": "(6x,2x)*",
+    "difficulty": 8,
+    "prerequisites": ["box", "5551"]
+  },
+  {
+    "id": "five-ball-split-multiplex-cascade",
+    "title": "Five Ball Split Multiplex Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/FiveBallSplitMultiplexCascade.html",
+    "object_count": 5,
+    "siteswap": "[32T]",
+    "difficulty": 6,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "martin",
+    "title": "Martin",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/Martin.html",
+    "object_count": 5,
+    "siteswap": "[62]25",
+    "difficulty": 6,
+    "prerequisites": ["the-w"]
+  },
+  {
+    "id": "five-ball-multiplex-columns",
+    "title": "Five Ball Multiplex Columns",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/FiveBallMultiplexColumns.html",
+    "object_count": 5,
+    "siteswap": "(4,0)([44],[44])",
+    "difficulty": 7,
+    "prerequisites": ["columns"]
+  },
+  {
+    "id": "five-ball-stacked-multiplex-cascade",
+    "title": "Five Ball Stacked Multiplex Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/FiveBallStackedMultiplexCascade.html",
+    "object_count": 5,
+    "siteswap": "3[33][33]",
+    "difficulty": 7,
+    "prerequisites": ["cascade"]
+  },
+  {
+    "id": "five-ball-cascade",
+    "title": "Five Ball Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/FiveBallCascade.html",
+    "object_count": 5,
+    "siteswap": "5",
+    "difficulty": 9,
+    "prerequisites": ["cascade", "552", "5551", "55550"]
+  },
+  {
+    "id": "five-ball-half-shower",
+    "title": "Five Ball Half-Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/FiveBallHalf-Shower.html",
+    "object_count": 5,
+    "siteswap": "73, 5, or (6x,4x)",
+    "difficulty": 9,
+    "prerequisites": ["five-ball-cascade", "four-ball-half-shower"]
+  },
+  {
+    "id": "five-ball-reverse-cascade",
+    "title": "Five Ball Reverse Cascade",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/FiveBallReverseCascade.html",
+    "object_count": 5,
+    "siteswap": "5",
+    "difficulty": 9,
+    "prerequisites": ["five-ball-cascade"]
+  },
+  {
+    "id": "five-ball-shower",
+    "title": "Five Ball Shower",
+    "source_url": "https://libraryofjuggling.com/Tricks/5balltricks/FiveBallShower.html",
+    "object_count": 5,
+    "siteswap": "91",
+    "difficulty": 9,
+    "prerequisites": ["four-ball-shower"]
+  },
+  {
+    "id": "six-ball-fountain",
+    "title": "Six Ball Fountain",
+    "source_url": "https://libraryofjuggling.com/Tricks/6balltricks/SixBallFountain.html",
+    "object_count": 6,
+    "siteswap": "6",
+    "difficulty": 9,
+    "prerequisites": ["fountain", "five-ball-cascade"]
+  }
+]
