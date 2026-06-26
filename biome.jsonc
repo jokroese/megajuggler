@@ -4,17 +4,18 @@
     "ignoreUnknown": false,
     "includes": [
       "**",
-      "!**/.git",
-      "!**/.venv",
-      "!**/node_modules",
-      "!**/.svelte-kit",
-      "!**/build",
-      "!**/dist",
-      "!**/.pytest_cache",
-      "!**/.ruff_cache",
-      "!**/.pyright",
-      "!data/raw",
-      "!data/interim"
+      "!!**/.git",
+      "!!**/.venv",
+      "!!**/node_modules",
+      "!!**/.svelte-kit",
+      "!!**/build",
+      "!!**/dist",
+      "!!**/.pytest_cache",
+      "!!**/.ruff_cache",
+      "!!**/.pyright",
+      "!!data/raw",
+      "!!data/interim",
+      "!!**/tests/fixtures"
     ]
   },
   "formatter": {
