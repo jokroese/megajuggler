@@ -1,5 +1,11 @@
 import { describe, expect, test } from "vitest";
-import { bucketTricks, type Trick } from "./tricks";
+import {
+  availableObjectCounts,
+  bucketTricks,
+  DEFAULT_TRICK_FILTERS,
+  filterTricks,
+  type Trick,
+} from "./tricks";
 
 const tricks: Trick[] = [
   {
@@ -29,6 +35,24 @@ const tricks: Trick[] = [
     difficulty: 4,
     prerequisites: ["infinity"],
   },
+  {
+    id: "fountain",
+    title: "Fountain",
+    source_url: "https://example.com/fountain",
+    object_count: 4,
+    siteswap: "4",
+    difficulty: 3,
+    prerequisites: [],
+  },
+  {
+    id: "mystery",
+    title: "Mystery",
+    source_url: "https://example.com/mystery",
+    object_count: null,
+    siteswap: null,
+    difficulty: null,
+    prerequisites: [],
+  },
 ];
 
 describe("bucketTricks", () => {
@@ -50,5 +74,65 @@ describe("bucketTricks", () => {
   test("treats tricks with no prerequisites as learnable when unknown", () => {
     const buckets = bucketTricks(tricks, new Set());
     expect(buckets.learnable.map((trick) => trick.id)).toContain("cascade");
+  });
+});
+
+describe("filterTricks", () => {
+  test("returns every trick with default filters", () => {
+    expect(filterTricks(tricks, DEFAULT_TRICK_FILTERS)).toHaveLength(tricks.length);
+  });
+
+  test("filters by title query", () => {
+    const filtered = filterTricks(tricks, {
+      ...DEFAULT_TRICK_FILTERS,
+      query: "slide",
+    });
+    expect(filtered.map((trick) => trick.id)).toEqual(["als-slide"]);
+  });
+
+  test("filters by siteswap query", () => {
+    const filtered = filterTricks(tricks, {
+      ...DEFAULT_TRICK_FILTERS,
+      query: "4x",
+    });
+    expect(filtered.map((trick) => trick.id)).toEqual(["als-slide"]);
+  });
+
+  test("filters by object count", () => {
+    const filtered = filterTricks(tricks, {
+      ...DEFAULT_TRICK_FILTERS,
+      objectCount: 4,
+    });
+    expect(filtered.map((trick) => trick.id)).toEqual(["fountain"]);
+  });
+
+  test("filters easy tricks", () => {
+    const filtered = filterTricks(tricks, {
+      ...DEFAULT_TRICK_FILTERS,
+      difficulty: "easy",
+    });
+    expect(filtered.map((trick) => trick.id)).toEqual(["cascade", "reverse-cascade", "fountain"]);
+  });
+
+  test("filters medium tricks", () => {
+    const filtered = filterTricks(tricks, {
+      ...DEFAULT_TRICK_FILTERS,
+      difficulty: "medium",
+    });
+    expect(filtered.map((trick) => trick.id)).toEqual(["als-slide"]);
+  });
+
+  test("filters unknown difficulty tricks", () => {
+    const filtered = filterTricks(tricks, {
+      ...DEFAULT_TRICK_FILTERS,
+      difficulty: "unknown",
+    });
+    expect(filtered.map((trick) => trick.id)).toEqual(["mystery"]);
+  });
+});
+
+describe("availableObjectCounts", () => {
+  test("returns sorted unique non-null object counts", () => {
+    expect(availableObjectCounts(tricks)).toEqual([3, 4]);
   });
 });

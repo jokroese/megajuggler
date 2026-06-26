@@ -14,6 +14,20 @@ export type TrickBuckets = {
   blocked: Trick[];
 };
 
+export type DifficultyFilter = "all" | "easy" | "medium" | "hard" | "unknown";
+
+export type TrickFilters = {
+  query: string;
+  objectCount: number | "all";
+  difficulty: DifficultyFilter;
+};
+
+export const DEFAULT_TRICK_FILTERS: TrickFilters = {
+  query: "",
+  objectCount: "all",
+  difficulty: "all",
+};
+
 export function bucketTricks(tricks: Trick[], knownIds: Set<string>): TrickBuckets {
   const known: Trick[] = [];
   const learnable: Trick[] = [];
@@ -36,6 +50,60 @@ export function bucketTricks(tricks: Trick[], knownIds: Set<string>): TrickBucke
   return { known, learnable, blocked };
 }
 
+export function filterTricks(tricks: Trick[], filters: TrickFilters): Trick[] {
+  const query = filters.query.trim().toLowerCase();
+
+  return tricks.filter((trick) => {
+    if (query && !matchesQuery(trick, query)) {
+      return false;
+    }
+
+    if (filters.objectCount !== "all" && trick.object_count !== filters.objectCount) {
+      return false;
+    }
+
+    return matchesDifficulty(trick, filters.difficulty);
+  });
+}
+
 export function trickTitleById(tricks: Trick[]): Map<string, string> {
   return new Map(tricks.map((trick) => [trick.id, trick.title]));
+}
+
+export function availableObjectCounts(tricks: Trick[]): number[] {
+  return [
+    ...new Set(tricks.map((trick) => trick.object_count).filter((value) => value !== null)),
+  ].toSorted((left, right) => left - right);
+}
+
+function matchesQuery(trick: Trick, query: string): boolean {
+  return (
+    trick.title.toLowerCase().includes(query) ||
+    trick.id.toLowerCase().includes(query) ||
+    (trick.siteswap?.toLowerCase().includes(query) ?? false)
+  );
+}
+
+function matchesDifficulty(trick: Trick, difficulty: DifficultyFilter): boolean {
+  if (difficulty === "all") {
+    return true;
+  }
+
+  if (difficulty === "unknown") {
+    return trick.difficulty === null;
+  }
+
+  if (trick.difficulty === null) {
+    return false;
+  }
+
+  if (difficulty === "easy") {
+    return trick.difficulty <= 3;
+  }
+
+  if (difficulty === "medium") {
+    return trick.difficulty >= 4 && trick.difficulty <= 6;
+  }
+
+  return trick.difficulty >= 7;
 }
