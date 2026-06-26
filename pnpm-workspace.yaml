@@ -1,0 +1,9 @@
+packages:
+  - "apps/*"
+
+minimumReleaseAge: 1440
+
+ignoredOptionalDependencies:
+  - "fsevents"
+onlyBuiltDependencies:
+  - esbuild

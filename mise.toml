@@ -1,0 +1,18 @@
+[tools]
+node = "24"
+pnpm = "10.16.0"
+python = "3.12"
+uv = "latest"
+just = "latest"
+
+[tasks.install]
+run = "pnpm install --frozen-lockfile && uv sync --all-packages"
+
+[tasks.dev]
+run = "pnpm run dev"
+
+[tasks.check]
+run = "pnpm run check && pnpm run typecheck && pnpm run test"
+
+[tasks.data]
+run = "pnpm run build:data"

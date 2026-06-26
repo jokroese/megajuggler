@@ -1,0 +1,29 @@
+{
+  "name": "megajuggler",
+  "private": true,
+  "packageManager": "pnpm@10.16.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "pnpm run build:data && pnpm --filter @megajuggler/web dev",
+    "build": "pnpm run build:data && pnpm --filter @megajuggler/web build",
+    "preview": "pnpm --filter @megajuggler/web preview",
+    "fmt": "biome format .",
+    "fmt:write": "biome format --write .",
+    "lint": "biome lint .",
+    "check": "biome check .",
+    "typecheck": "pnpm -r --if-present typecheck && pnpm exec pyright",
+    "test": "pnpm -r --if-present test && uv run pytest",
+    "fetch:loj": "uv run megajuggler loj fetch",
+    "parse:loj": "uv run megajuggler loj parse",
+    "build:data": "uv run megajuggler data build",
+    "schema:generate": "uv run megajuggler schema export"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "latest",
+    "pyright": "1.1.411",
+    "typescript": "latest",
+    "vitest": "latest"
+  }
+}

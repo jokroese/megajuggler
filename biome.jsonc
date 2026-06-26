@@ -1,0 +1,43 @@
+{
+  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "**",
+      "!**/.git",
+      "!**/.venv",
+      "!**/node_modules",
+      "!**/.svelte-kit",
+      "!**/build",
+      "!**/dist",
+      "!**/.pytest_cache",
+      "!**/.ruff_cache",
+      "!**/.pyright",
+      "!data/raw",
+      "!data/interim"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
+  },
+  "html": {
+    "experimentalFullSupportEnabled": true
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}

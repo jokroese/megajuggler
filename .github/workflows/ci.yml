@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: jdx/mise-action@v2
+      - name: Install JS dependencies
+        run: mise x -- pnpm install --frozen-lockfile
+      - name: Install Python dependencies
+        run: mise x -- uv sync --all-packages --frozen
+      - name: Check JS
+        run: mise x -- pnpm run check
+      - name: Typecheck
+        run: mise x -- pnpm run typecheck
+      - name: Test
+        run: mise x -- pnpm run test
