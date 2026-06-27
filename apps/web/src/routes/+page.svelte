@@ -17,7 +17,7 @@
     type Trick,
     trickTitleById,
   } from "$lib/tricks";
-
+  type ViewMode = "learn" | "practise" | "explore";
   let tricks = $state<Trick[]>([]);
   let knownIds = $state<Set<string>>(new Set());
   let isLoading = $state(true);
@@ -26,6 +26,7 @@
   let query = $state(DEFAULT_TRICK_FILTERS.query);
   let objectCount = $state<number | "all">(DEFAULT_TRICK_FILTERS.objectCount);
   let difficulty = $state<DifficultyFilter>(DEFAULT_TRICK_FILTERS.difficulty);
+  let viewMode = $state<ViewMode>("learn");
 
   let filters = $derived({
     query,
@@ -36,6 +37,20 @@
   let buckets = $derived(bucketTricks(visibleTricks, knownIds));
   let titles = $derived(trickTitleById(tricks));
   let objectCounts = $derived(availableObjectCounts(tricks));
+  let visibleIntentCount = $derived(
+    viewMode === "learn"
+      ? buckets.learnable.length
+      : viewMode === "practise"
+        ? buckets.known.length
+        : visibleTricks.length,
+  );
+  let intentSummary = $derived(
+    viewMode === "learn"
+      ? `Showing ${visibleIntentCount} learnable trick${visibleIntentCount === 1 ? "" : "s"}.`
+      : viewMode === "practise"
+        ? `Showing ${visibleIntentCount} known trick${visibleIntentCount === 1 ? "" : "s"}.`
+        : `Showing ${visibleIntentCount} of ${tricks.length} tricks.`,
+  );
 
   onMount(async () => {
     try {
@@ -133,12 +148,33 @@
   {:else}
     <section aria-labelledby="controls-heading" class="controls">
       <div>
-        <h2 id="controls-heading">Controls</h2>
-        <p>
-          Showing {visibleTricks.length} of {tricks.length} tricks.
-          {knownIds.size} known.
-        </p>
+        <h2 id="controls-heading">What are you here to do?</h2>
+        <p>{intentSummary} {knownIds.size} known overall.</p>
       </div>
+      <fieldset class="mode-switcher">
+        <legend>Mode</legend>
+        <label>
+          <input type="radio" name="view-mode" value="learn" bind:group={viewMode} />
+          <span>
+            <strong>Learn next</strong>
+            <small>Show tricks where all prerequisites are known.</small>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="view-mode" value="practise" bind:group={viewMode} />
+          <span>
+            <strong>Practise</strong>
+            <small>Show tricks you already know.</small>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="view-mode" value="explore" bind:group={viewMode} />
+          <span>
+            <strong>Explore</strong>
+            <small>Show known, learnable, and blocked tricks together.</small>
+          </span>
+        </label>
+      </fieldset>
 
       <div class="filters">
         <label>
@@ -188,160 +224,269 @@
       {/if}
     </section>
 
-    <section aria-labelledby="known-heading">
-      <h2 id="known-heading">Known</h2>
-      {#if buckets.known.length === 0}
-        <p>No known tricks match the current filters.</p>
-      {:else}
-        <div class="trick-list">
-          {#each buckets.known as trick (trick.id)}
-            <article class="trick-card">
-              {#if trick.animation_url}
-                <img
-                  class="trick-animation"
-                  src={trick.animation_url}
-                  alt=""
-                  loading="lazy"
-                  width="160"
-                />
-              {/if}
-              <div class="trick-content">
-                <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
-                <label for={`trick-known-${trick.id}`}>
-                  <input
-                    id={`trick-known-${trick.id}`}
-                    type="checkbox"
-                    checked={knownIds.has(trick.id)}
-                    onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+    {#if viewMode === "learn"}
+      <section aria-labelledby="learn-next-heading">
+        <h2 id="learn-next-heading">Learn next</h2>
+        <p>Tricks where you already know every prerequisite.</p>
+        {#if buckets.learnable.length === 0}
+          <p>No learnable tricks match the current filters.</p>
+        {:else}
+          <div class="trick-list">
+            {#each buckets.learnable as trick (trick.id)}
+              <article class="trick-card">
+                {#if trick.animation_url}
+                  <img
+                    class="trick-animation"
+                    src={trick.animation_url}
+                    alt=""
+                    loading="lazy"
+                    width="160"
                   />
-                  <strong>{trick.title}</strong>
-                </label>
-                <div class="meta">
-                  {#if trick.category}
-                    <span>{trick.category}</span>
-                  {/if}
-                  {#if trick.difficulty}
-                    <span>Difficulty {trick.difficulty}/10</span>
-                  {/if}
-                  {#if trick.siteswap}
-                    <code>{trick.siteswap}</code>
-                  {/if}
-                </div>
-                {#if trick.description_preview}
-                  <p class="description-preview">{trick.description_preview}</p>
                 {/if}
-                <p class="links">
-                  <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
-                </p>
-              </div>
-            </article>
-          {/each}
-        </div>
-      {/if}
-    </section>
-
-    <section aria-labelledby="learn-next-heading">
-      <h2 id="learn-next-heading">Learn next</h2>
-      <p>Tricks where you already know every prerequisite.</p>
-      {#if buckets.learnable.length === 0}
-        <p>No learnable tricks match the current filters.</p>
-      {:else}
-        <div class="trick-list">
-          {#each buckets.learnable as trick (trick.id)}
-            <article class="trick-card">
-              {#if trick.animation_url}
-                <img
-                  class="trick-animation"
-                  src={trick.animation_url}
-                  alt=""
-                  loading="lazy"
-                  width="160"
-                />
-              {/if}
-              <div class="trick-content">
-                <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
-                <label for={`trick-learnable-${trick.id}`}>
-                  <input
-                    id={`trick-learnable-${trick.id}`}
-                    type="checkbox"
-                    checked={knownIds.has(trick.id)}
-                    onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+                <div class="trick-content">
+                  <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
+                  <label for={`trick-learnable-${trick.id}`}>
+                    <input
+                      id={`trick-learnable-${trick.id}`}
+                      type="checkbox"
+                      checked={knownIds.has(trick.id)}
+                      onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+                    />
+                    <strong>{trick.title}</strong>
+                  </label>
+                  <div class="meta">
+                    {#if trick.category}
+                      <span>{trick.category}</span>
+                    {/if}
+                    {#if trick.difficulty}
+                      <span>Difficulty {trick.difficulty}/10</span>
+                    {/if}
+                    {#if trick.siteswap}
+                      <code>{trick.siteswap}</code>
+                    {/if}
+                  </div>
+                  {#if trick.prerequisites.length > 0}
+                    <p class="lineage">From: {allPrerequisiteTitles(trick)}</p>
+                  {/if}
+                  {#if trick.description_preview}
+                    <p class="description-preview">{trick.description_preview}</p>
+                  {/if}
+                  <p class="links">
+                    <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                  </p>
+                </div>
+              </article>
+            {/each}
+          </div>
+        {/if}
+      </section>
+    {:else if viewMode === "practise"}
+      <section aria-labelledby="known-heading">
+        <h2 id="known-heading">Practise</h2>
+        <p>Tricks you already know.</p>
+        {#if buckets.known.length === 0}
+          <p>No known tricks match the current filters.</p>
+        {:else}
+          <div class="trick-list">
+            {#each buckets.known as trick (trick.id)}
+              <article class="trick-card">
+                {#if trick.animation_url}
+                  <img
+                    class="trick-animation"
+                    src={trick.animation_url}
+                    alt=""
+                    loading="lazy"
+                    width="160"
                   />
+                {/if}
+                <div class="trick-content">
+                  <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
+                  <label for={`trick-known-${trick.id}`}>
+                    <input
+                      id={`trick-known-${trick.id}`}
+                      type="checkbox"
+                      checked={knownIds.has(trick.id)}
+                      onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+                    />
+                    <strong>{trick.title}</strong>
+                  </label>
+                  <div class="meta">
+                    {#if trick.category}
+                      <span>{trick.category}</span>
+                    {/if}
+                    {#if trick.difficulty}
+                      <span>Difficulty {trick.difficulty}/10</span>
+                    {/if}
+                    {#if trick.siteswap}
+                      <code>{trick.siteswap}</code>
+                    {/if}
+                  </div>
+                  {#if trick.description_preview}
+                    <p class="description-preview">{trick.description_preview}</p>
+                  {/if}
+                  <p class="links">
+                    <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                  </p>
+                </div>
+              </article>
+            {/each}
+          </div>
+        {/if}
+      </section>
+    {:else}
+      <section aria-labelledby="known-heading">
+        <h2 id="known-heading">Known</h2>
+        {#if buckets.known.length === 0}
+          <p>No known tricks match the current filters.</p>
+        {:else}
+          <div class="trick-list">
+            {#each buckets.known as trick (trick.id)}
+              <article class="trick-card">
+                {#if trick.animation_url}
+                  <img
+                    class="trick-animation"
+                    src={trick.animation_url}
+                    alt=""
+                    loading="lazy"
+                    width="160"
+                  />
+                {/if}
+                <div class="trick-content">
+                  <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
+                  <label for={`trick-known-${trick.id}`}>
+                    <input
+                      id={`trick-known-${trick.id}`}
+                      type="checkbox"
+                      checked={knownIds.has(trick.id)}
+                      onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+                    />
+                    <strong>{trick.title}</strong>
+                  </label>
+                  <div class="meta">
+                    {#if trick.category}
+                      <span>{trick.category}</span>
+                    {/if}
+                    {#if trick.difficulty}
+                      <span>Difficulty {trick.difficulty}/10</span>
+                    {/if}
+                    {#if trick.siteswap}
+                      <code>{trick.siteswap}</code>
+                    {/if}
+                  </div>
+                  {#if trick.description_preview}
+                    <p class="description-preview">{trick.description_preview}</p>
+                  {/if}
+                  <p class="links">
+                    <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                  </p>
+                </div>
+              </article>
+            {/each}
+          </div>
+        {/if}
+      </section>
+      <section aria-labelledby="learn-next-heading">
+        <h2 id="learn-next-heading">Learn next</h2>
+        <p>Tricks where you already know every prerequisite.</p>
+        {#if buckets.learnable.length === 0}
+          <p>No learnable tricks match the current filters.</p>
+        {:else}
+          <div class="trick-list">
+            {#each buckets.learnable as trick (trick.id)}
+              <article class="trick-card">
+                {#if trick.animation_url}
+                  <img
+                    class="trick-animation"
+                    src={trick.animation_url}
+                    alt=""
+                    loading="lazy"
+                    width="160"
+                  />
+                {/if}
+                <div class="trick-content">
+                  <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
+                  <label for={`trick-learnable-${trick.id}`}>
+                    <input
+                      id={`trick-learnable-${trick.id}`}
+                      type="checkbox"
+                      checked={knownIds.has(trick.id)}
+                      onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+                    />
+                    <strong>{trick.title}</strong>
+                  </label>
+                  <div class="meta">
+                    {#if trick.category}
+                      <span>{trick.category}</span>
+                    {/if}
+                    {#if trick.difficulty}
+                      <span>Difficulty {trick.difficulty}/10</span>
+                    {/if}
+                    {#if trick.siteswap}
+                      <code>{trick.siteswap}</code>
+                    {/if}
+                  </div>
+                  {#if trick.prerequisites.length > 0}
+                    <p class="lineage">From: {allPrerequisiteTitles(trick)}</p>
+                  {/if}
+                  {#if trick.description_preview}
+                    <p class="description-preview">{trick.description_preview}</p>
+                  {/if}
+                  <p class="links">
+                    <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                  </p>
+                </div>
+              </article>
+            {/each}
+          </div>
+        {/if}
+      </section>
+      <section aria-labelledby="blocked-heading">
+        <h2 id="blocked-heading">Blocked</h2>
+        <p>Tricks where at least one prerequisite is still missing.</p>
+        {#if buckets.blocked.length === 0}
+          <p>No blocked tricks match the current filters.</p>
+        {:else}
+          <div class="trick-list">
+            {#each buckets.blocked as trick (trick.id)}
+              <article class="trick-card">
+                {#if trick.animation_url}
+                  <img
+                    class="trick-animation"
+                    src={trick.animation_url}
+                    alt=""
+                    loading="lazy"
+                    width="160"
+                  />
+                {/if}
+                <div class="trick-content">
                   <strong>{trick.title}</strong>
-                </label>
-                <div class="meta">
-                  {#if trick.category}
-                    <span>{trick.category}</span>
+                  <div class="meta">
+                    {#if trick.category}
+                      <span>{trick.category}</span>
+                    {/if}
+                    {#if trick.difficulty}
+                      <span>Difficulty {trick.difficulty}/10</span>
+                    {/if}
+                    {#if trick.siteswap}
+                      <code>{trick.siteswap}</code>
+                    {/if}
+                  </div>
+                  {#if trick.prerequisites.length > 0}
+                    <p class="lineage">Missing: {missingPrerequisiteTitles(trick)}</p>
                   {/if}
-                  {#if trick.difficulty}
-                    <span>Difficulty {trick.difficulty}/10</span>
+                  {#if trick.description_preview}
+                    <p class="description-preview">{trick.description_preview}</p>
                   {/if}
-                  {#if trick.siteswap}
-                    <code>{trick.siteswap}</code>
-                  {/if}
+                  <p class="links">
+                    <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                  </p>
                 </div>
-                {#if trick.prerequisites.length > 0}
-                  <p class="lineage">From: {allPrerequisiteTitles(trick)}</p>
-                {/if}
-                {#if trick.description_preview}
-                  <p class="description-preview">{trick.description_preview}</p>
-                {/if}
-                <p class="links">
-                  <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
-                </p>
-              </div>
-            </article>
-          {/each}
-        </div>
-      {/if}
-    </section>
-
-    <section aria-labelledby="blocked-heading">
-      <h2 id="blocked-heading">Blocked</h2>
-      <p>Tricks where at least one prerequisite is still missing.</p>
-      {#if buckets.blocked.length === 0}
-        <p>No blocked tricks match the current filters.</p>
-      {:else}
-        <div class="trick-list">
-          {#each buckets.blocked as trick (trick.id)}
-            <article class="trick-card">
-              {#if trick.animation_url}
-                <img
-                  class="trick-animation"
-                  src={trick.animation_url}
-                  alt=""
-                  loading="lazy"
-                  width="160"
-                />
-              {/if}
-              <div class="trick-content">
-                <strong>{trick.title}</strong>
-                <div class="meta">
-                  {#if trick.category}
-                    <span>{trick.category}</span>
-                  {/if}
-                  {#if trick.difficulty}
-                    <span>Difficulty {trick.difficulty}/10</span>
-                  {/if}
-                  {#if trick.siteswap}
-                    <code>{trick.siteswap}</code>
-                  {/if}
-                </div>
-                {#if trick.prerequisites.length > 0}
-                  <p class="lineage">Missing: {missingPrerequisiteTitles(trick)}</p>
-                {/if}
-                {#if trick.description_preview}
-                  <p class="description-preview">{trick.description_preview}</p>
-                {/if}
-                <p class="links">
-                  <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
-                </p>
-              </div>
-            </article>
-          {/each}
-        </div>
-      {/if}
-    </section>
+              </article>
+            {/each}
+          </div>
+        {/if}
+      </section>
+    {/if}
   {/if}
 </main>
 
@@ -374,7 +519,48 @@
     margin-top: 1rem;
   }
 
-  .filters label,
+  .mode-switcher {
+    display: grid;
+    gap: 0.5rem;
+    border: 0;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+  .mode-switcher legend {
+    font-weight: 700;
+  }
+  .mode-switcher label {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    cursor: pointer;
+  }
+  .mode-switcher label:has(input:checked) {
+    border-color: currentColor;
+    background: color-mix(in srgb, currentColor 7%, transparent);
+  }
+  .mode-switcher span {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .mode-switcher small {
+    opacity: 0.75;
+  }
+
+  @media (min-width: 48rem) {
+    .mode-switcher {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .mode-switcher legend {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .filters > label,
   .import-button {
     display: grid;
     gap: 0.25rem;
