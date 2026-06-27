@@ -7,6 +7,7 @@
     saveKnownIds,
     serialiseProgress,
   } from "$lib/progress";
+  import TrickCard from "$lib/TrickCard.svelte";
   import {
     availableObjectCounts,
     bucketTricks,
@@ -18,7 +19,7 @@
     trickTitleById,
   } from "$lib/tricks";
 
-  type ViewMode = "learn" | "practise" | "explore";
+  type ViewMode = "learn" | "practice" | "explore";
   let tricks = $state<Trick[]>([]);
   let knownIds = $state<Set<string>>(new Set());
   let isLoading = $state(true);
@@ -46,7 +47,7 @@
   let visibleIntentCount = $derived(
     viewMode === "learn"
       ? buckets.learnable.length
-      : viewMode === "practise"
+      : viewMode === "practice"
         ? buckets.known.length
         : visibleTricks.length,
   );
@@ -55,7 +56,7 @@
       ? `Showing ${visibleIntentCount} learnable trick${visibleIntentCount === 1 ? "" : "s"}${
           isFiltered ? " matching filters" : ""
         }.`
-      : viewMode === "practise"
+      : viewMode === "practice"
         ? `Showing ${visibleIntentCount} known trick${visibleIntentCount === 1 ? "" : "s"}${
             isFiltered ? " matching filters" : ""
           }.`
@@ -184,9 +185,9 @@
           </span>
         </label>
         <label>
-          <input type="radio" name="view-mode" value="practise" bind:group={viewMode} />
+          <input type="radio" name="view-mode" value="practice" bind:group={viewMode} />
           <span>
-            <strong>Practise</strong>
+            <strong>Practice</strong>
             <small>Show tricks you already know.</small>
           </span>
         </label>
@@ -204,7 +205,7 @@
         </label>
 
         <label>
-          Objects
+          Balls
           <select bind:value={objectCount}>
             <option value="all">All</option>
             {#each objectCounts as count}
@@ -291,13 +292,14 @@
                   </p>
                 </div>
               </article>
+              />
             {/each}
           </div>
         {/if}
       </section>
-    {:else if viewMode === "practise"}
+    {:else if viewMode === "practice"}
       <section aria-labelledby="known-heading">
-        <h2 id="known-heading">Practise</h2>
+        <h2 id="known-heading">Practice</h2>
         <p>Tricks you already know.</p>
         {#if buckets.known.length === 0}
           <p>No known tricks match the current filters.</p>
@@ -344,6 +346,7 @@
                   </p>
                 </div>
               </article>
+              />
             {/each}
           </div>
         {/if}
@@ -396,6 +399,7 @@
                   </p>
                 </div>
               </article>
+              />
             {/each}
           </div>
         {/if}
@@ -451,6 +455,7 @@
                   </p>
                 </div>
               </article>
+              />
             {/each}
           </div>
         {/if}
@@ -497,6 +502,7 @@
                   </p>
                 </div>
               </article>
+              />
             {/each}
           </div>
         {/if}
@@ -689,5 +695,4 @@
       inline-size: 100%;
       max-inline-size: 20rem;
     }
-  }
 </style>
