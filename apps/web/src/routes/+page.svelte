@@ -281,7 +281,7 @@
                   {/if}
                 </div>
                 {#if trick.prerequisites.length > 0}
-                  <p class="lineage">Prerequisites: {allPrerequisiteTitles(trick)}</p>
+                  <p class="lineage">From: {allPrerequisiteTitles(trick)}</p>
                 {/if}
                 {#if trick.description_preview}
                   <p class="description-preview">{trick.description_preview}</p>
@@ -328,8 +328,7 @@
                   {/if}
                 </div>
                 {#if trick.prerequisites.length > 0}
-                  <p class="lineage">Prerequisites: {allPrerequisiteTitles(trick)}</p>
-                  <p>Missing: {missingPrerequisiteTitles(trick)}</p>
+                  <p class="lineage">Missing: {missingPrerequisiteTitles(trick)}</p>
                 {/if}
                 {#if trick.description_preview}
                   <p class="description-preview">{trick.description_preview}</p>
