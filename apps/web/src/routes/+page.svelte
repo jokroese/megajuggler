@@ -26,7 +26,7 @@
   let query = $state(DEFAULT_TRICK_FILTERS.query);
   let objectCount = $state<number | "all">(DEFAULT_TRICK_FILTERS.objectCount);
   let difficulty = $state<DifficultyFilter>(DEFAULT_TRICK_FILTERS.difficulty);
-  let viewMode = $state<ViewMode>("learn");
+  let viewMode = $state<ViewMode>("explore");
 
   let filters = $derived({
     query,
@@ -37,6 +37,11 @@
   let buckets = $derived(bucketTricks(visibleTricks, knownIds));
   let titles = $derived(trickTitleById(tricks));
   let objectCounts = $derived(availableObjectCounts(tricks));
+  let isFiltered = $derived(
+    query.trim() !== "" ||
+      objectCount !== DEFAULT_TRICK_FILTERS.objectCount ||
+      difficulty !== DEFAULT_TRICK_FILTERS.difficulty,
+  );
   let visibleIntentCount = $derived(
     viewMode === "learn"
       ? buckets.learnable.length
@@ -46,10 +51,19 @@
   );
   let intentSummary = $derived(
     viewMode === "learn"
-      ? `Showing ${visibleIntentCount} learnable trick${visibleIntentCount === 1 ? "" : "s"}.`
+      ? `Showing ${visibleIntentCount} learnable trick${visibleIntentCount === 1 ? "" : "s"}${
+          isFiltered ? " matching filters" : ""
+        }.`
       : viewMode === "practise"
-        ? `Showing ${visibleIntentCount} known trick${visibleIntentCount === 1 ? "" : "s"}.`
-        : `Showing ${visibleIntentCount} of ${tricks.length} tricks.`,
+        ? `Showing ${visibleIntentCount} known trick${visibleIntentCount === 1 ? "" : "s"}${
+            isFiltered ? " matching filters" : ""
+          }.`
+        : `Showing ${visibleIntentCount} trick${visibleIntentCount === 1 ? "" : "s"}${
+            isFiltered ? " matching filters" : ""
+          }.`,
+  );
+  let progressSummary = $derived(
+    `${buckets.known.length} known · ${buckets.learnable.length} learnable · ${buckets.blocked.length} blocked`,
   );
 
   onMount(async () => {
@@ -149,10 +163,18 @@
     <section aria-labelledby="controls-heading" class="controls">
       <div>
         <h2 id="controls-heading">What are you here to do?</h2>
-        <p>{intentSummary} {knownIds.size} known overall.</p>
+        <p>{intentSummary}</p>
+        <p class="progress-summary">{progressSummary}</p>
       </div>
       <fieldset class="mode-switcher">
         <legend>Mode</legend>
+        <label>
+          <input type="radio" name="view-mode" value="explore" bind:group={viewMode} />
+          <span>
+            <strong>Explore</strong>
+            <small>Show known, learnable, and blocked tricks together.</small>
+          </span>
+        </label>
         <label>
           <input type="radio" name="view-mode" value="learn" bind:group={viewMode} />
           <span>
@@ -165,13 +187,6 @@
           <span>
             <strong>Practise</strong>
             <small>Show tricks you already know.</small>
-          </span>
-        </label>
-        <label>
-          <input type="radio" name="view-mode" value="explore" bind:group={viewMode} />
-          <span>
-            <strong>Explore</strong>
-            <small>Show known, learnable, and blocked tricks together.</small>
           </span>
         </label>
       </fieldset>
@@ -509,6 +524,11 @@
     border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
     border-radius: 0.75rem;
     padding: 1rem;
+  }
+
+  .progress-summary {
+    margin-top: -0.5rem;
+    opacity: 0.75;
   }
 
   .filters,
