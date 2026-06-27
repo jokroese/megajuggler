@@ -14,9 +14,11 @@
     DEFAULT_TRICK_FILTERS,
     type DifficultyFilter,
     filterTricks,
+    missingPrerequisiteIds,
     prerequisiteTitles,
     type Trick,
     trickTitleById,
+    unlockCountsByTrickId,
   } from "$lib/tricks";
 
   type ViewMode = "learn" | "practice" | "explore";
@@ -39,6 +41,7 @@
   let buckets = $derived(bucketTricks(visibleTricks, knownIds));
   let titles = $derived(trickTitleById(tricks));
   let objectCounts = $derived(availableObjectCounts(tricks));
+  let unlockCounts = $derived(unlockCountsByTrickId(tricks));
   let isFiltered = $derived(
     query.trim() !== "" ||
       objectCount !== DEFAULT_TRICK_FILTERS.objectCount ||
@@ -99,6 +102,74 @@
       .filter((id) => !knownIds.has(id))
       .map((id) => titles.get(id) ?? id)
       .join(", ");
+  }
+
+  function titleForTrickId(id: string): string {
+    return titles.get(id) ?? id;
+  }
+
+  function missingPrerequisiteTitlesList(trick: Trick): string[] {
+    return missingPrerequisiteIds(trick, knownIds).map(titleForTrickId);
+  }
+
+  function unlocksInsight(trick: Trick): string | null {
+    const unlockCount = unlockCounts.get(trick.id) ?? 0;
+    if (unlockCount === 0) {
+      return null;
+    }
+
+    return `This trick unlocks ${unlockCount} other trick${unlockCount === 1 ? "" : "s"}.`;
+  }
+
+  function blockedPathInsight(trick: Trick): string | null {
+    const missing = missingPrerequisiteTitlesList(trick);
+    if (missing.length === 0) {
+      return null;
+    }
+
+    const firstMissing = missing[0];
+    if (missing.length === 1) {
+      return `Learn ${firstMissing} to unlock.`;
+    }
+
+    return `Start with ${firstMissing} to work towards ${trick.title}.`;
+  }
+
+  function missingPrerequisiteCountInsight(trick: Trick): string | null {
+    const missingCount = missingPrerequisiteIds(trick, knownIds).length;
+    if (missingCount <= 1) {
+      return null;
+    }
+
+    return `${missingCount} prerequisites missing.`;
+  }
+
+  function compactInsights(insights: Array<string | null>): string[] {
+    return insights.filter((insight): insight is string => insight !== null);
+  }
+
+  function cardInsights(trick: Trick): string[] {
+    return compactInsights([unlocksInsight(trick)]);
+  }
+
+  function blockedLineageMode(trick: Trick): "missing" | "none" {
+    return missingPrerequisiteIds(trick, knownIds).length > 1 ? "missing" : "none";
+  }
+
+  function blockedLineageText(trick: Trick): string {
+    if (blockedLineageMode(trick) === "none") {
+      return "";
+    }
+
+    return missingPrerequisiteTitles(trick);
+  }
+
+  function blockedCardInsights(trick: Trick): string[] {
+    return compactInsights([
+      blockedPathInsight(trick),
+      missingPrerequisiteCountInsight(trick),
+      unlocksInsight(trick),
+    ]);
   }
 
   function allPrerequisiteTitles(trick: Trick): string {
@@ -256,6 +327,7 @@
                 showCheckbox
                 lineageMode={trick.prerequisites.length > 0 ? "from" : "none"}
                 lineageText={allPrerequisiteTitles(trick)}
+                insights={cardInsights(trick)}
                 onKnownChange={setKnown}
               />
             {/each}
@@ -276,6 +348,7 @@
                 checkboxId={`trick-known-${trick.id}`}
                 checked={knownIds.has(trick.id)}
                 showCheckbox
+                insights={cardInsights(trick)}
                 onKnownChange={setKnown}
               />
             {/each}
@@ -295,6 +368,7 @@
                 checkboxId={`trick-known-${trick.id}`}
                 checked={knownIds.has(trick.id)}
                 showCheckbox
+                insights={cardInsights(trick)}
                 onKnownChange={setKnown}
               />
             {/each}
@@ -316,6 +390,7 @@
                 showCheckbox
                 lineageMode={trick.prerequisites.length > 0 ? "from" : "none"}
                 lineageText={allPrerequisiteTitles(trick)}
+                insights={cardInsights(trick)}
                 onKnownChange={setKnown}
               />
             {/each}
@@ -332,8 +407,9 @@
             {#each buckets.blocked as trick (trick.id)}
               <TrickCard
                 {trick}
-                lineageMode={trick.prerequisites.length > 0 ? "missing" : "none"}
-                lineageText={missingPrerequisiteTitles(trick)}
+                lineageMode={blockedLineageMode(trick)}
+                lineageText={blockedLineageText(trick)}
+                insights={blockedCardInsights(trick)}
               />
             {/each}
           </div>

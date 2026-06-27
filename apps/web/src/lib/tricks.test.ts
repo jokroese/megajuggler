@@ -4,7 +4,9 @@ import {
   bucketTricks,
   DEFAULT_TRICK_FILTERS,
   filterTricks,
+  missingPrerequisiteIds,
   type Trick,
+  unlockCountsByTrickId,
 } from "./tricks";
 
 const tricks: Trick[] = [
@@ -154,5 +156,33 @@ describe("filterTricks", () => {
 describe("availableObjectCounts", () => {
   test("returns sorted unique non-null object counts", () => {
     expect(availableObjectCounts(tricks)).toEqual([3, 4]);
+  });
+});
+
+describe("unlockCountsByTrickId", () => {
+  test("counts direct tricks unlocked by each prerequisite", () => {
+    const unlockCounts = unlockCountsByTrickId(tricks);
+
+    expect(unlockCounts.get("cascade")).toBe(1);
+    expect(unlockCounts.get("infinity")).toBe(1);
+    expect(unlockCounts.get("reverse-cascade")).toBeUndefined();
+  });
+});
+
+describe("missingPrerequisiteIds", () => {
+  test("returns missing prerequisite IDs for a trick", () => {
+    expect(
+      missingPrerequisiteIds(
+        {
+          ...tricks[2],
+          prerequisites: ["cascade", "infinity"],
+        },
+        new Set(["cascade"]),
+      ),
+    ).toEqual(["infinity"]);
+  });
+
+  test("returns an empty list when every prerequisite is known", () => {
+    expect(missingPrerequisiteIds(tricks[1], new Set(["cascade"]))).toEqual([]);
   });
 });

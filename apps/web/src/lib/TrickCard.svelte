@@ -10,6 +10,7 @@
     showCheckbox = false,
     lineageMode = "none",
     lineageText = "",
+    insights = [],
     onKnownChange,
   }: {
     trick: Trick;
@@ -18,6 +19,7 @@
     showCheckbox?: boolean;
     lineageMode?: LineageMode;
     lineageText?: string;
+    insights?: string[];
     onKnownChange?: (id: string, known: boolean) => void;
   } = $props();
 
@@ -80,6 +82,14 @@
       </p>
     {/if}
 
+    {#if insights.length > 0}
+      <ul class="insights" aria-label={`${trick.title} learning hints`}>
+        {#each insights as insight}
+          <li>{insight}</li>
+        {/each}
+      </ul>
+    {/if}
+
     {#if trick.description_preview}
       <p class="description-preview">{trick.description_preview}</p>
     {/if}
@@ -134,6 +144,18 @@
 
   .lineage {
     font-size: 0.95rem;
+  }
+
+  .insights {
+    display: grid;
+    gap: 0.25rem;
+    margin-block: 0.75rem 0;
+    padding-inline-start: 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .insights li::marker {
+    color: color-mix(in srgb, currentColor 60%, transparent);
   }
 
   .description-preview {

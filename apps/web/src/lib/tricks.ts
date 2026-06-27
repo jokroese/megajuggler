@@ -78,6 +78,22 @@ export function prerequisiteTitles(trick: Trick, titles: Map<string, string>): s
   return trick.prerequisites.map((id) => titles.get(id) ?? id);
 }
 
+export function missingPrerequisiteIds(trick: Trick, knownIds: Set<string>): string[] {
+  return trick.prerequisites.filter((id) => !knownIds.has(id));
+}
+
+export function unlockCountsByTrickId(tricks: Trick[]): Map<string, number> {
+  const unlockCounts = new Map<string, number>();
+
+  for (const trick of tricks) {
+    for (const prerequisiteId of trick.prerequisites) {
+      unlockCounts.set(prerequisiteId, (unlockCounts.get(prerequisiteId) ?? 0) + 1);
+    }
+  }
+
+  return unlockCounts;
+}
+
 export function availableObjectCounts(tricks: Trick[]): number[] {
   return [
     ...new Set(tricks.map((trick) => trick.object_count).filter((value) => value !== null)),
