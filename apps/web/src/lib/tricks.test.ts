@@ -149,14 +149,6 @@ describe("filterTricks", () => {
     });
     expect(filtered.map((trick) => trick.id)).toEqual(["als-slide"]);
   });
-
-  test("filters unknown difficulty tricks", () => {
-    const filtered = filterTricks(tricks, {
-      ...DEFAULT_TRICK_FILTERS,
-      difficulty: "unknown",
-    });
-    expect(filtered.map((trick) => trick.id)).toEqual(["mystery"]);
-  });
 });
 
 describe("availableObjectCounts", () => {

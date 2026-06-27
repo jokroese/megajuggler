@@ -18,7 +18,7 @@ export type TrickBuckets = {
   blocked: Trick[];
 };
 
-export type DifficultyFilter = "all" | "easy" | "medium" | "hard" | "unknown";
+export type DifficultyFilter = "all" | "easy" | "medium" | "hard";
 
 export type TrickFilters = {
   query: string;
@@ -96,10 +96,6 @@ function matchesQuery(trick: Trick, query: string): boolean {
 function matchesDifficulty(trick: Trick, difficulty: DifficultyFilter): boolean {
   if (difficulty === "all") {
     return true;
-  }
-
-  if (difficulty === "unknown") {
-    return trick.difficulty === null;
   }
 
   if (trick.difficulty === null) {

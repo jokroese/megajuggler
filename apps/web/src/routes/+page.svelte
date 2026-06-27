@@ -17,6 +17,7 @@
     type Trick,
     trickTitleById,
   } from "$lib/tricks";
+
   type ViewMode = "learn" | "practise" | "explore";
   let tricks = $state<Trick[]>([]);
   let knownIds = $state<Set<string>>(new Set());
@@ -219,7 +220,6 @@
             <option value="easy">Easy, 1–3</option>
             <option value="medium">Medium, 4–6</option>
             <option value="hard">Hard, 7–10</option>
-            <option value="unknown">Unknown</option>
           </select>
         </label>
 
