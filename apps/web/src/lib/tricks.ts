@@ -2,10 +2,14 @@ export type Trick = {
   id: string;
   title: string;
   source_url: string;
+  category: string | null;
   object_count: number | null;
   siteswap: string | null;
   difficulty: number | null;
   prerequisites: string[];
+  animation_url: string | null;
+  tutorial_urls: string[];
+  description_preview: string | null;
 };
 
 export type TrickBuckets = {
@@ -70,6 +74,10 @@ export function trickTitleById(tricks: Trick[]): Map<string, string> {
   return new Map(tricks.map((trick) => [trick.id, trick.title]));
 }
 
+export function prerequisiteTitles(trick: Trick, titles: Map<string, string>): string[] {
+  return trick.prerequisites.map((id) => titles.get(id) ?? id);
+}
+
 export function availableObjectCounts(tricks: Trick[]): number[] {
   return [
     ...new Set(tricks.map((trick) => trick.object_count).filter((value) => value !== null)),
@@ -80,6 +88,7 @@ function matchesQuery(trick: Trick, query: string): boolean {
   return (
     trick.title.toLowerCase().includes(query) ||
     trick.id.toLowerCase().includes(query) ||
+    (trick.category?.toLowerCase().includes(query) ?? false) ||
     (trick.siteswap?.toLowerCase().includes(query) ?? false)
   );
 }

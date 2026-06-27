@@ -45,7 +45,10 @@ def parse_cached_tricks(*, raw_dir: Path | None = None, output_dir: Path | None 
             source_url=str(link.url),
             relative_path=str(relative_cache_path),
         )
-        tricks.append(trick.model_dump(mode="json"))
+        trick_data = trick.model_dump(mode="json")
+        trick_data["category"] = link.category
+        trick_data["object_count"] = link.object_count
+        tricks.append(trick_data)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path = output_dir / "tricks.json"

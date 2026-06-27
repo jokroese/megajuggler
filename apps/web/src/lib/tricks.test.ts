@@ -12,46 +12,66 @@ const tricks: Trick[] = [
     id: "cascade",
     title: "Cascade",
     source_url: "https://example.com/cascade",
+    category: "Three Ball Patterns",
     object_count: 3,
     siteswap: "3",
     difficulty: 1,
     prerequisites: [],
+    animation_url: "https://example.com/cascade.gif",
+    tutorial_urls: [],
+    description_preview: "The Cascade is the most basic three ball pattern.",
   },
   {
     id: "reverse-cascade",
     title: "Reverse Cascade",
     source_url: "https://example.com/reverse-cascade",
+    category: "Three Ball Patterns",
     object_count: 3,
     siteswap: "3",
     difficulty: 2,
     prerequisites: ["cascade"],
+    animation_url: null,
+    tutorial_urls: [],
+    description_preview: null,
   },
   {
     id: "als-slide",
     title: "Al's Slide",
     source_url: "https://example.com/als-slide",
+    category: "Three Ball Patterns",
     object_count: 3,
     siteswap: "(4x,2x)(2,4x)*",
     difficulty: 4,
     prerequisites: ["infinity"],
+    animation_url: "https://example.com/als-slide.gif",
+    tutorial_urls: ["https://example.com/als-slide-tutorial"],
+    description_preview: "Al's Slide is a three ball pattern.",
   },
   {
     id: "fountain",
     title: "Fountain",
     source_url: "https://example.com/fountain",
+    category: "Four Ball Patterns",
     object_count: 4,
     siteswap: "4",
     difficulty: 3,
     prerequisites: [],
+    animation_url: null,
+    tutorial_urls: [],
+    description_preview: null,
   },
   {
     id: "mystery",
     title: "Mystery",
     source_url: "https://example.com/mystery",
+    category: null,
     object_count: null,
     siteswap: null,
     difficulty: null,
     prerequisites: [],
+    animation_url: null,
+    tutorial_urls: [],
+    description_preview: null,
   },
 ];
 
@@ -88,6 +108,14 @@ describe("filterTricks", () => {
       query: "slide",
     });
     expect(filtered.map((trick) => trick.id)).toEqual(["als-slide"]);
+  });
+
+  test("filters by category query", () => {
+    const filtered = filterTricks(tricks, {
+      ...DEFAULT_TRICK_FILTERS,
+      query: "four ball",
+    });
+    expect(filtered.map((trick) => trick.id)).toEqual(["fountain"]);
   });
 
   test("filters by siteswap query", () => {

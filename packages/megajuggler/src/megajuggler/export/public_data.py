@@ -4,7 +4,9 @@ import json
 import re
 import shutil
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
+
+from pydantic import HttpUrl
 
 from megajuggler.paths import interim_loj_dir, public_data_dir, web_static_data_dir
 from megajuggler.schema.models import Trick
@@ -38,15 +40,21 @@ def build_public_tricks(
             for prereq in raw.get("prerequisites", [])
             if prereq["title"] in title_to_id
         ]
+        media = raw.get("media", [])
+        tutorials = raw.get("tutorials", [])
         tricks.append(
             Trick(
                 id=slugify(raw["title"]),
                 title=raw["title"],
                 source_url=raw["source_url"],
-                object_count=infer_object_count(raw),
+                category=raw.get("category"),
+                object_count=raw.get("object_count") or infer_object_count(raw),
                 siteswap=raw.get("siteswap"),
                 difficulty=raw.get("difficulty"),
                 prerequisites=prerequisites,
+                animation_url=first_media_url(media),
+                tutorial_urls=tutorial_urls(tutorials),
+                description_preview=make_description_preview(raw.get("description_text")),
             )
         )
 
@@ -73,3 +81,38 @@ def infer_object_count(raw: dict[str, Any]) -> int | None:
     if match:
         return int(match.group(1))
     return None
+
+
+def first_media_url(media: Any) -> str | None:
+    if not isinstance(media, list) or not media:
+        return None
+    if not isinstance(media[0], dict):
+        return None
+    item = cast(dict[str, Any], media[0])
+    url = item.get("url")
+    return url if isinstance(url, str) else None
+
+
+def tutorial_urls(tutorials: Any) -> list[HttpUrl | str]:
+    if not isinstance(tutorials, list):
+        return []
+    urls: list[HttpUrl | str] = []
+    for item in cast(list[Any], tutorials):
+        if not isinstance(item, dict):
+            continue
+        tutorial = cast(dict[str, Any], item)
+        url = tutorial.get("url")
+        if isinstance(url, str):
+            urls.append(url)
+    return urls
+
+
+def make_description_preview(value: Any, *, max_length: int = 220) -> str | None:
+    if not isinstance(value, str):
+        return None
+    preview = re.sub(r"\s+", " ", value).strip()
+    if not preview:
+        return None
+    if len(preview) <= max_length:
+        return preview
+    return preview[:max_length].rsplit(" ", maxsplit=1)[0] + "\u2026"

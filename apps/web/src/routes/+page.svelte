@@ -13,6 +13,7 @@
     DEFAULT_TRICK_FILTERS,
     type DifficultyFilter,
     filterTricks,
+    prerequisiteTitles,
     type Trick,
     trickTitleById,
   } from "$lib/tricks";
@@ -67,6 +68,10 @@
       .filter((id) => !knownIds.has(id))
       .map((id) => titles.get(id) ?? id)
       .join(", ");
+  }
+
+  function allPrerequisiteTitles(trick: Trick): string {
+    return prerequisiteTitles(trick, titles).join(", ");
   }
 
   function clearFilters() {
@@ -191,26 +196,43 @@
         <div class="trick-list">
           {#each buckets.known as trick (trick.id)}
             <article class="trick-card">
-              <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
-              <label for={`trick-known-${trick.id}`}>
-                <input
-                  id={`trick-known-${trick.id}`}
-                  type="checkbox"
-                  checked={knownIds.has(trick.id)}
-                  onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+              {#if trick.animation_url}
+                <img
+                  class="trick-animation"
+                  src={trick.animation_url}
+                  alt=""
+                  loading="lazy"
+                  width="160"
                 />
-                <strong>{trick.title}</strong>
-              </label>
-              <div class="meta">
-                {#if trick.object_count}
-                  <span>{trick.object_count} balls</span>
+              {/if}
+              <div class="trick-content">
+                <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
+                <label for={`trick-known-${trick.id}`}>
+                  <input
+                    id={`trick-known-${trick.id}`}
+                    type="checkbox"
+                    checked={knownIds.has(trick.id)}
+                    onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+                  />
+                  <strong>{trick.title}</strong>
+                </label>
+                <div class="meta">
+                  {#if trick.category}
+                    <span>{trick.category}</span>
+                  {/if}
+                  {#if trick.difficulty}
+                    <span>Difficulty {trick.difficulty}/10</span>
+                  {/if}
+                  {#if trick.siteswap}
+                    <code>{trick.siteswap}</code>
+                  {/if}
+                </div>
+                {#if trick.description_preview}
+                  <p class="description-preview">{trick.description_preview}</p>
                 {/if}
-                {#if trick.difficulty}
-                  <span>Difficulty {trick.difficulty}/10</span>
-                {/if}
-                {#if trick.siteswap}
-                  <code>{trick.siteswap}</code>
-                {/if}
+                <p class="links">
+                  <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                </p>
               </div>
             </article>
           {/each}
@@ -227,26 +249,46 @@
         <div class="trick-list">
           {#each buckets.learnable as trick (trick.id)}
             <article class="trick-card">
-              <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
-              <label for={`trick-learnable-${trick.id}`}>
-                <input
-                  id={`trick-learnable-${trick.id}`}
-                  type="checkbox"
-                  checked={knownIds.has(trick.id)}
-                  onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+              {#if trick.animation_url}
+                <img
+                  class="trick-animation"
+                  src={trick.animation_url}
+                  alt=""
+                  loading="lazy"
+                  width="160"
                 />
-                <strong>{trick.title}</strong>
-              </label>
-              <div class="meta">
-                {#if trick.object_count}
-                  <span>{trick.object_count} balls</span>
+              {/if}
+              <div class="trick-content">
+                <!-- biome-ignore lint/a11y/noLabelWithoutControl: checkbox and title are nested in the label -->
+                <label for={`trick-learnable-${trick.id}`}>
+                  <input
+                    id={`trick-learnable-${trick.id}`}
+                    type="checkbox"
+                    checked={knownIds.has(trick.id)}
+                    onchange={(event) => setKnown(trick.id, event.currentTarget.checked)}
+                  />
+                  <strong>{trick.title}</strong>
+                </label>
+                <div class="meta">
+                  {#if trick.category}
+                    <span>{trick.category}</span>
+                  {/if}
+                  {#if trick.difficulty}
+                    <span>Difficulty {trick.difficulty}/10</span>
+                  {/if}
+                  {#if trick.siteswap}
+                    <code>{trick.siteswap}</code>
+                  {/if}
+                </div>
+                {#if trick.prerequisites.length > 0}
+                  <p class="lineage">Prerequisites: {allPrerequisiteTitles(trick)}</p>
                 {/if}
-                {#if trick.difficulty}
-                  <span>Difficulty {trick.difficulty}/10</span>
+                {#if trick.description_preview}
+                  <p class="description-preview">{trick.description_preview}</p>
                 {/if}
-                {#if trick.siteswap}
-                  <code>{trick.siteswap}</code>
-                {/if}
+                <p class="links">
+                  <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                </p>
               </div>
             </article>
           {/each}
@@ -263,21 +305,39 @@
         <div class="trick-list">
           {#each buckets.blocked as trick (trick.id)}
             <article class="trick-card">
-              <strong>{trick.title}</strong>
-              <div class="meta">
-                {#if trick.object_count}
-                  <span>{trick.object_count} balls</span>
-                {/if}
-                {#if trick.difficulty}
-                  <span>Difficulty {trick.difficulty}/10</span>
-                {/if}
-                {#if trick.siteswap}
-                  <code>{trick.siteswap}</code>
-                {/if}
-              </div>
-              {#if trick.prerequisites.length > 0}
-                <p>Missing: {missingPrerequisiteTitles(trick)}</p>
+              {#if trick.animation_url}
+                <img
+                  class="trick-animation"
+                  src={trick.animation_url}
+                  alt=""
+                  loading="lazy"
+                  width="160"
+                />
               {/if}
+              <div class="trick-content">
+                <strong>{trick.title}</strong>
+                <div class="meta">
+                  {#if trick.category}
+                    <span>{trick.category}</span>
+                  {/if}
+                  {#if trick.difficulty}
+                    <span>Difficulty {trick.difficulty}/10</span>
+                  {/if}
+                  {#if trick.siteswap}
+                    <code>{trick.siteswap}</code>
+                  {/if}
+                </div>
+                {#if trick.prerequisites.length > 0}
+                  <p class="lineage">Prerequisites: {allPrerequisiteTitles(trick)}</p>
+                  <p>Missing: {missingPrerequisiteTitles(trick)}</p>
+                {/if}
+                {#if trick.description_preview}
+                  <p class="description-preview">{trick.description_preview}</p>
+                {/if}
+                <p class="links">
+                  <a href={trick.source_url} target="_blank" rel="noreferrer">Open LoJ page</a>
+                </p>
+              </div>
             </article>
           {/each}
         </div>
@@ -357,9 +417,24 @@
   }
 
   .trick-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
     border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
     border-radius: 0.75rem;
     padding: 1rem;
+  }
+
+  .trick-content {
+    min-width: 0;
+  }
+
+  .trick-animation {
+    inline-size: 10rem;
+    max-inline-size: 30vw;
+    block-size: auto;
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, currentColor 5%, transparent);
   }
 
   .trick-card label {
@@ -376,7 +451,38 @@
     opacity: 0.8;
   }
 
+  .lineage,
+  .description-preview,
+  .links {
+    margin-block: 0.75rem 0;
+  }
+
+  .lineage {
+    font-size: 0.95rem;
+  }
+
+  .description-preview {
+    max-width: 60rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (max-width: 42rem) {
+    .trick-card {
+      grid-template-columns: 1fr;
+    }
+
+    .trick-animation {
+      inline-size: 100%;
+      max-inline-size: 20rem;
+    }
   }
 </style>
