@@ -91,6 +91,8 @@ def test_build_public_tricks(tmp_path: Path) -> None:
         interim_dir=interim_dir,
         output_dir=output_dir,
         copy_to_web_static=False,
+        # This unit test does not create cached GIF fixtures or run ffmpeg.
+        convert_media=False,
     )
     tricks = json.loads(output_path.read_text(encoding="utf-8"))
 
@@ -104,7 +106,9 @@ def test_build_public_tricks(tmp_path: Path) -> None:
             "siteswap": None,
             "difficulty": 2,
             "prerequisites": [],
-            "animation_url": "https://libraryofjuggling.com/JugglingGifs/3balltricks/infinity.gif",
+            "animation_gif_url": None,
+            "animation_webm_url": None,
+            "animation_mp4_url": None,
             "tutorial_urls": [],
             "description_preview": "Infinity is a three ball pattern.",
         },
@@ -117,7 +121,9 @@ def test_build_public_tricks(tmp_path: Path) -> None:
             "siteswap": "(4x,2x)(2,4x)*",
             "difficulty": 4,
             "prerequisites": ["infinity"],
-            "animation_url": "https://libraryofjuggling.com/JugglingGifs/3balltricks/alsslide.gif",
+            "animation_gif_url": None,
+            "animation_webm_url": None,
+            "animation_mp4_url": None,
             "tutorial_urls": ["https://www.youtube.com/watch?v=8C6VjYyqxAg"],
             "description_preview": "Al's Slide is a three ball pattern established by Idiosensory.",
         },

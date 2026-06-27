@@ -12,6 +12,8 @@ class Trick(BaseModel):
     siteswap: str | None = None
     difficulty: int | None = Field(default=None, ge=1, le=10)
     prerequisites: list[str] = Field(default_factory=list)
-    animation_url: HttpUrl | str | None = None
+    animation_gif_url: HttpUrl | str | None = None
+    animation_webm_url: HttpUrl | str | None = None
+    animation_mp4_url: HttpUrl | str | None = None
     tutorial_urls: list[HttpUrl | str] = Field(default_factory=lambda: list[HttpUrl | str]())
     description_preview: str | None = None

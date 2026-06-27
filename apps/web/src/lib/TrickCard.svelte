@@ -38,16 +38,33 @@
 </script>
 
 <article class="trick-card">
-  {#if trick.animation_url}
+  {#if trick.animation_webm_url || trick.animation_mp4_url}
+    <video
+      class="trick-animation"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      width="160"
+      aria-label={`${trick.title} animation`}
+    >
+      {#if trick.animation_webm_url}
+        <source src={trick.animation_webm_url} type="video/webm" />
+      {/if}
+      {#if trick.animation_mp4_url}
+        <source src={trick.animation_mp4_url} type="video/mp4" />
+      {/if}
+    </video>
+  {:else if trick.animation_gif_url}
     <img
       class="trick-animation"
-      src={trick.animation_url}
+      src={trick.animation_gif_url}
       alt=""
       loading="lazy"
       width="160"
     />
   {/if}
-
   <div class="trick-content">
     {#if showCheckbox}
       <label for={checkboxId}>

@@ -21,6 +21,10 @@ def raw_loj_dir() -> Path:
     return data_dir() / "raw" / "loj"
 
 
+def raw_loj_media_dir() -> Path:
+    return data_dir() / "raw" / "loj-media"
+
+
 def interim_loj_dir() -> Path:
     return data_dir() / "interim" / "loj"
 
@@ -29,5 +33,13 @@ def public_data_dir() -> Path:
     return data_dir() / "public"
 
 
+def public_media_dir() -> Path:
+    return public_data_dir() / "media" / "loj"
+
+
 def web_static_data_dir() -> Path:
     return find_repo_root() / "apps" / "web" / "static" / "data"
+
+
+def web_static_media_dir() -> Path:
+    return web_static_data_dir() / "media" / "loj"

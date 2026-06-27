@@ -7,7 +7,9 @@ export type Trick = {
   siteswap: string | null;
   difficulty: number | null;
   prerequisites: string[];
-  animation_url: string | null;
+  animation_gif_url: string | null;
+  animation_webm_url: string | null;
+  animation_mp4_url: string | null;
   tutorial_urls: string[];
   description_preview: string | null;
 };

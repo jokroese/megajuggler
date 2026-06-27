@@ -39,6 +39,10 @@ DelaySecondsOption = Annotated[
     float,
     typer.Option(help="Delay between trick-page requests."),
 ]
+FetchMediaOption = Annotated[
+    bool,
+    typer.Option(help="Cache Library of Juggling animation GIFs."),
+]
 CopyToWebStaticOption = Annotated[
     bool,
     typer.Option(help="Copy generated public data into apps/web/static/data."),
@@ -60,12 +64,14 @@ def loj_fetch(
     output_dir: OutputDirOption = None,
     delay_seconds: DelaySecondsOption = 0.25,
     force: ForceOption = False,
+    fetch_media: FetchMediaOption = True,
 ) -> None:
-    """Fetch the Library of Juggling homepage and all linked trick pages."""
+    """Fetch the Library of Juggling homepage, trick pages, and animation media."""
     paths = fetch_all_tricks(
         output_dir=output_dir,
         delay_seconds=delay_seconds,
         force=force,
+        fetch_media=fetch_media,
     )
     typer.echo(f"Cached {len(paths)} trick pages")
 

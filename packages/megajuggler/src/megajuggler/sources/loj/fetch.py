@@ -9,8 +9,8 @@ import httpx
 import typer
 from rich.progress import track
 
-from megajuggler.paths import raw_loj_dir
-from megajuggler.sources.loj.parse import LOJ_BASE_URL, parse_homepage_links
+from megajuggler.paths import raw_loj_dir, raw_loj_media_dir
+from megajuggler.sources.loj.parse import LOJ_BASE_URL, parse_homepage_links, parse_trick_page
 
 USER_AGENT = "megajuggler/0.1 (+https://github.com/jokroese/megajuggler)"
 
@@ -37,6 +37,8 @@ def fetch_all_tricks(
     base_url: str = LOJ_BASE_URL,
     delay_seconds: float = 0.25,
     force: bool = False,
+    fetch_media: bool = True,
+    media_output_dir: Path | None = None,
 ) -> list[Path]:
     output_dir = output_dir or raw_loj_dir()
     homepage_path = fetch_homepage(output_dir=output_dir, base_url=base_url, force=force)
@@ -52,6 +54,18 @@ def fetch_all_tricks(
             force=force,
         )
         written.append(output_path)
+
+        if fetch_media:
+            try:
+                trick = parse_trick_page(
+                    output_path.read_text(encoding="utf-8"),
+                    source_url=str(link.url),
+                    relative_path=str(url_to_cache_path(str(link.url), base_url=base_url)),
+                )
+                fetch_trick_media(trick.media, output_dir=media_output_dir, force=force)
+            except ValueError as caught:
+                typer.echo(f"Could not parse media for {link.url}: {caught}")
+
         time.sleep(delay_seconds)
 
     manifest_path = output_dir / "manifest.json"
@@ -81,10 +95,52 @@ def fetch_url_to_path(*, url: str, output_path: Path, force: bool = False) -> No
     typer.echo(f"Fetched {url} -> {output_path}")
 
 
+def fetch_binary_url_to_path(*, url: str, output_path: Path, force: bool = False) -> None:
+    if output_path.exists() and not force:
+        typer.echo(f"Already cached: {output_path}")
+        return
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with httpx.Client(
+        timeout=20.0,
+        follow_redirects=True,
+        headers={"User-Agent": USER_AGENT},
+    ) as client:
+        response = client.get(url)
+        response.raise_for_status()
+
+    output_path.write_bytes(response.content)
+    typer.echo(f"Fetched {url} -> {output_path}")
+
+
+def fetch_trick_media(
+    media: object, *, output_dir: Path | None = None, force: bool = False
+) -> None:
+    if not isinstance(media, list):
+        return
+
+    output_dir = output_dir or raw_loj_media_dir()
+    for item in media:
+        url = getattr(item, "url", None)
+        if url is None:
+            continue
+        fetch_binary_url_to_path(
+            url=str(url),
+            output_path=output_dir / url_to_media_cache_path(str(url)),
+            force=force,
+        )
+
+
 def url_to_cache_path(url: str, *, base_url: str = LOJ_BASE_URL) -> Path:
     base_path = urlparse(base_url).path.rstrip("/")
     parsed = urlparse(url)
     relative = parsed.path.removeprefix(base_path).lstrip("/")
     if not relative:
         relative = "Home.html"
+    return Path(relative)
+
+
+def url_to_media_cache_path(url: str) -> Path:
+    parsed = urlparse(url)
+    relative = parsed.path.lstrip("/")
     return Path(relative)

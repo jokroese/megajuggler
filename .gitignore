@@ -19,3 +19,6 @@ data/interim/
 !.env.example
 
 repomix-output.xml
+
+data/public/
+apps/web/static/data/
