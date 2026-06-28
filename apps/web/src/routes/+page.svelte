@@ -1,5 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state";
   import {
     createProgressExport,
     loadKnownIds,
@@ -22,6 +25,8 @@
   } from "$lib/tricks";
 
   type ViewMode = "learn" | "practice" | "explore";
+  const VIEW_MODES = new Set<ViewMode>(["learn", "practice", "explore"]);
+  const DIFFICULTIES = new Set<DifficultyFilter>(["all", "easy", "medium", "hard"]);
   let tricks = $state<Trick[]>([]);
   let knownIds = $state<Set<string>>(new Set());
   let isLoading = $state(true);
@@ -31,12 +36,42 @@
   let objectCount = $state<number | "all">(DEFAULT_TRICK_FILTERS.objectCount);
   let difficulty = $state<DifficultyFilter>(DEFAULT_TRICK_FILTERS.difficulty);
   let viewMode = $state<ViewMode>("explore");
+  let hasReadInitialUrl = $state(false);
+  let lastWrittenSearch = $state("");
 
   let filters = $derived({
     query,
     objectCount,
     difficulty,
   });
+
+  // Keep the local filter state in sync when the user lands on, refreshes,
+  // or moves back/forward to a filtered URL.
+  $effect(() => {
+    const search = page.url.search;
+    if (!browser || search === lastWrittenSearch) {
+      return;
+    }
+    readFiltersFromSearchParams(page.url.searchParams);
+    lastWrittenSearch = search;
+    hasReadInitialUrl = true;
+  });
+
+  // Write filter state into the URL.
+  $effect(() => {
+    const nextSearch = filterSearchParams().toString();
+    const nextSearchWithPrefix = nextSearch ? `?${nextSearch}` : "";
+    if (!browser || !hasReadInitialUrl || nextSearchWithPrefix === page.url.search) {
+      return;
+    }
+    lastWrittenSearch = nextSearchWithPrefix;
+    goto(`${page.url.pathname}${nextSearchWithPrefix}`, {
+      keepFocus: true,
+      noScroll: true,
+      replaceState: false,
+    });
+  });
+
   let visibleTricks = $derived(filterTricks(tricks, filters));
   let buckets = $derived(bucketTricks(visibleTricks, knownIds));
   let titles = $derived(trickTitleById(tricks));
@@ -72,6 +107,9 @@
   );
 
   onMount(async () => {
+    readFiltersFromSearchParams(page.url.searchParams);
+    lastWrittenSearch = page.url.search;
+    hasReadInitialUrl = true;
     try {
       const response = await fetch("/data/tricks.json");
       if (!response.ok) {
@@ -85,6 +123,43 @@
       isLoading = false;
     }
   });
+
+  function readFiltersFromSearchParams(params: URLSearchParams) {
+    query = params.get("q") ?? DEFAULT_TRICK_FILTERS.query;
+    const balls = params.get("balls");
+    objectCount = balls === null || balls === "all" ? "all" : parseObjectCount(balls);
+    const urlDifficulty = params.get("difficulty");
+    difficulty =
+      urlDifficulty && DIFFICULTIES.has(urlDifficulty as DifficultyFilter)
+        ? (urlDifficulty as DifficultyFilter)
+        : DEFAULT_TRICK_FILTERS.difficulty;
+    const urlMode = params.get("mode");
+    viewMode =
+      urlMode && VIEW_MODES.has(urlMode as ViewMode) ? (urlMode as ViewMode) : "explore";
+  }
+
+  function parseObjectCount(value: string): number | "all" {
+    const parsed = Number(value);
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : "all";
+  }
+
+  function filterSearchParams(): URLSearchParams {
+    const params = new URLSearchParams();
+    const trimmedQuery = query.trim();
+    if (trimmedQuery) {
+      params.set("q", trimmedQuery);
+    }
+    if (objectCount !== DEFAULT_TRICK_FILTERS.objectCount) {
+      params.set("balls", String(objectCount));
+    }
+    if (difficulty !== DEFAULT_TRICK_FILTERS.difficulty) {
+      params.set("difficulty", difficulty);
+    }
+    if (viewMode !== "explore") {
+      params.set("mode", viewMode);
+    }
+    return params;
+  }
 
   function setKnown(id: string, known: boolean) {
     const next = new Set(knownIds);
@@ -180,6 +255,7 @@
     query = DEFAULT_TRICK_FILTERS.query;
     objectCount = DEFAULT_TRICK_FILTERS.objectCount;
     difficulty = DEFAULT_TRICK_FILTERS.difficulty;
+    viewMode = "explore";
   }
 
   function exportProgress() {
