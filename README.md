@@ -1,16 +1,32 @@
-# megajuggler
+# Megajuggler
 
-Monorepo for juggling data tooling and the public web app.
+A web app to guide you through learning new juggling tricks.
 
-```txt
-apps/web                 SvelteKit frontend
-packages/megajuggler     Python scraping, ingest, schema, export tooling
-data/public              generated frontend data
+## Setup
+
+```bash
+mise install
+just install
 ```
 
-## Media pipeline
+Requires ffmpeg for media conversion.
 
-megajuggler loj fetch caches Library of Juggling trick pages and animation GIFs.
-megajuggler data build converts cached GIFs into WebM and MP4 loops for the web app, while keeping a local GIF fallback.
+## Build data
 
-The conversion step requires ffmpeg on PATH.
+```bash
+just fetch-loj
+just parse-loj
+just data
+```
+
+## Run
+
+```bash
+just dev
+```
+
+## Check
+
+```bash
+just check
+```
