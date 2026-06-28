@@ -110,13 +110,14 @@
     readFiltersFromSearchParams(page.url.searchParams);
     lastWrittenSearch = page.url.search;
     hasReadInitialUrl = true;
+    knownIds = loadKnownIds();
+
     try {
       const response = await fetch("/data/tricks.json");
       if (!response.ok) {
         throw new Error(`Failed to load tricks.json: ${response.status}`);
       }
       tricks = await response.json();
-      knownIds = loadKnownIds();
     } catch (caught) {
       error = caught instanceof Error ? caught.message : "Failed to load tricks.";
     } finally {
@@ -304,89 +305,98 @@
     <p>Track the tricks you know and discover what you can learn next.</p>
   </header>
 
+  <section aria-labelledby="controls-heading" class="controls">
+    <div>
+      <h2 id="controls-heading">What are you here to do?</h2>
+      <p>Choose a mode, then narrow the trick list with search and filters.</p>
+    </div>
+
+    <fieldset class="mode-switcher">
+      <legend>Mode</legend>
+      <label>
+        <input type="radio" name="view-mode" value="explore" bind:group={viewMode} />
+        <span>
+          <strong>Explore</strong>
+          <small>Show known, learnable, and blocked tricks together.</small>
+        </span>
+      </label>
+      <label>
+        <input type="radio" name="view-mode" value="learn" bind:group={viewMode} />
+        <span>
+          <strong>Learn next</strong>
+          <small>Show tricks where all prerequisites are known.</small>
+        </span>
+      </label>
+      <label>
+        <input type="radio" name="view-mode" value="practice" bind:group={viewMode} />
+        <span>
+          <strong>Practice</strong>
+          <small>Show tricks you already know.</small>
+        </span>
+      </label>
+    </fieldset>
+
+    <div class="filters">
+      <label>
+        Search
+        <input
+          type="search"
+          bind:value={query}
+          placeholder="Search title, ID, or siteswap"
+          autocomplete="off"
+        />
+      </label>
+
+      <label>
+        Balls
+        <select bind:value={objectCount} disabled={isLoading}>
+          <option value="all">All</option>
+          {#each objectCounts as count}
+            <option value={count}>{count} balls</option>
+          {/each}
+        </select>
+      </label>
+
+      <label>
+        Difficulty
+        <select bind:value={difficulty}>
+          <option value="all">All</option>
+          <option value="easy">Easy, 1–3</option>
+          <option value="medium">Medium, 4–6</option>
+          <option value="hard">Hard, 7–10</option>
+        </select>
+      </label>
+
+      <button type="button" onclick={clearFilters}>Clear filters</button>
+    </div>
+
+    <div class="progress-actions">
+      <button type="button" onclick={exportProgress}>Export progress</button>
+      <label class="import-button">
+        Import progress
+        <input type="file" accept="application/json,.json" onchange={importProgress} />
+      </label>
+    </div>
+
+    {#if importMessage}
+      <p role="status">{importMessage}</p>
+    {/if}
+  </section>
+
+  <div class="result-summary" aria-live="polite">
+    {#if isLoading}
+      <p>Loading trick results…</p>
+    {:else if !error}
+      <p><strong>{intentSummary}</strong></p>
+      <p>{progressSummary}</p>
+    {/if}
+  </div>
+
   {#if isLoading}
-    <p>Loading tricks…</p>
+    <p class="results-status">Loading tricks…</p>
   {:else if error}
     <p role="alert">{error}</p>
   {:else}
-    <section aria-labelledby="controls-heading" class="controls">
-      <div>
-        <h2 id="controls-heading">What are you here to do?</h2>
-        <p>{intentSummary}</p>
-        <p class="progress-summary">{progressSummary}</p>
-      </div>
-      <fieldset class="mode-switcher">
-        <legend>Mode</legend>
-        <label>
-          <input type="radio" name="view-mode" value="explore" bind:group={viewMode} />
-          <span>
-            <strong>Explore</strong>
-            <small>Show known, learnable, and blocked tricks together.</small>
-          </span>
-        </label>
-        <label>
-          <input type="radio" name="view-mode" value="learn" bind:group={viewMode} />
-          <span>
-            <strong>Learn next</strong>
-            <small>Show tricks where all prerequisites are known.</small>
-          </span>
-        </label>
-        <label>
-          <input type="radio" name="view-mode" value="practice" bind:group={viewMode} />
-          <span>
-            <strong>Practice</strong>
-            <small>Show tricks you already know.</small>
-          </span>
-        </label>
-      </fieldset>
-
-      <div class="filters">
-        <label>
-          Search
-          <input
-            type="search"
-            bind:value={query}
-            placeholder="Search title, ID, or siteswap"
-            autocomplete="off"
-          />
-        </label>
-
-        <label>
-          Balls
-          <select bind:value={objectCount}>
-            <option value="all">All</option>
-            {#each objectCounts as count}
-              <option value={count}>{count} balls</option>
-            {/each}
-          </select>
-        </label>
-
-        <label>
-          Difficulty
-          <select bind:value={difficulty}>
-            <option value="all">All</option>
-            <option value="easy">Easy, 1–3</option>
-            <option value="medium">Medium, 4–6</option>
-            <option value="hard">Hard, 7–10</option>
-          </select>
-        </label>
-
-        <button type="button" onclick={clearFilters}>Clear filters</button>
-      </div>
-
-      <div class="progress-actions">
-        <button type="button" onclick={exportProgress}>Export progress</button>
-        <label class="import-button">
-          Import progress
-          <input type="file" accept="application/json,.json" onchange={importProgress} />
-        </label>
-      </div>
-
-      {#if importMessage}
-        <p role="status">{importMessage}</p>
-      {/if}
-    </section>
-
     {#if viewMode === "learn"}
       <section aria-labelledby="learn-next-heading">
         <h2 id="learn-next-heading">Learn next</h2>
@@ -516,9 +526,19 @@
     padding: 1rem;
   }
 
-  .progress-summary {
-    margin-top: -0.5rem;
-    opacity: 0.75;
+  .result-summary {
+    display: grid;
+    gap: 0.25rem;
+    margin-block: 1rem 2rem;
+    color: color-mix(in srgb, currentColor 75%, transparent);
+  }
+
+  .result-summary p {
+    margin: 0;
+  }
+
+  .results-status {
+    margin-block: 2rem;
   }
 
   .filters,
