@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Trick } from "./tricks";
+  import { animationUrl, descriptionPreview, type Trick } from "./tricks";
 
   type LineageMode = "from" | "missing" | "none";
 
@@ -23,6 +23,8 @@
     onKnownChange?: (id: string, known: boolean) => void;
   } = $props();
 
+  let preview = $derived(descriptionPreview(trick.description));
+
   function handleKnownChange(event: Event) {
     if (!onKnownChange) {
       return;
@@ -38,33 +40,20 @@
 </script>
 
 <article class="trick-card">
-  {#if trick.animation_webm_url || trick.animation_mp4_url}
-    <video
-      class="trick-animation"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="metadata"
-      width="160"
-      aria-label={`${trick.title} animation`}
-    >
-      {#if trick.animation_webm_url}
-        <source src={trick.animation_webm_url} type="video/webm" />
-      {/if}
-      {#if trick.animation_mp4_url}
-        <source src={trick.animation_mp4_url} type="video/mp4" />
-      {/if}
-    </video>
-  {:else if trick.animation_gif_url}
-    <img
-      class="trick-animation"
-      src={trick.animation_gif_url}
-      alt=""
-      loading="lazy"
-      width="160"
-    />
-  {/if}
+  <video
+    class="trick-animation"
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="metadata"
+    width="160"
+    aria-label={`${trick.title} animation`}
+  >
+    <source src={animationUrl(trick, "webm")} type="video/webm" />
+    <source src={animationUrl(trick, "mp4")} type="video/mp4" />
+  </video>
+
   <div class="trick-content">
     {#if showCheckbox}
       <label for={checkboxId}>
@@ -82,8 +71,8 @@
     {/if}
 
     <div class="meta">
-      {#if trick.category}
-        <span>{trick.category}</span>
+      {#if trick.object_count}
+        <span>{trick.object_count} ball{trick.object_count === 1 ? "" : "s"}</span>
       {/if}
       {#if trick.difficulty}
         <span>Difficulty {trick.difficulty}/10</span>
@@ -107,8 +96,8 @@
       </ul>
     {/if}
 
-    {#if trick.description_preview}
-      <p class="description-preview">{trick.description_preview}</p>
+    {#if preview}
+      <p class="description-preview">{preview}</p>
     {/if}
 
     <p class="links">

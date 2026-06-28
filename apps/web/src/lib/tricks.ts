@@ -2,16 +2,11 @@ export type Trick = {
   id: string;
   title: string;
   source_url: string;
-  category: string | null;
   object_count: number | null;
   siteswap: string | null;
   difficulty: number | null;
   prerequisites: string[];
-  animation_gif_url: string | null;
-  animation_webm_url: string | null;
-  animation_mp4_url: string | null;
-  tutorial_urls: string[];
-  description_preview: string | null;
+  description: string | null;
 };
 
 export type TrickBuckets = {
@@ -102,11 +97,31 @@ export function availableObjectCounts(tricks: Trick[]): number[] {
   ].toSorted((left, right) => left - right);
 }
 
+export function animationUrl(trick: Trick, extension: "webm" | "mp4"): string {
+  return `/data/media/loj/${trick.id}.${extension}`;
+}
+
+export function descriptionPreview(description: string | null, maxLength = 220): string | null {
+  if (!description) {
+    return null;
+  }
+
+  const normalised = description.replace(/\s+/g, " ").trim();
+  if (!normalised || normalised.length <= maxLength) {
+    return normalised || null;
+  }
+
+  const truncated = normalised.slice(0, maxLength);
+  const lastSpace = truncated.lastIndexOf(" ");
+  return `${truncated.slice(0, lastSpace > 0 ? lastSpace : maxLength)}…`;
+}
+
 function matchesQuery(trick: Trick, query: string): boolean {
   return (
     trick.title.toLowerCase().includes(query) ||
     trick.id.toLowerCase().includes(query) ||
-    (trick.category?.toLowerCase().includes(query) ?? false) ||
+    (trick.object_count !== null && `${trick.object_count} ball`.includes(query)) ||
+    (trick.object_count !== null && `${trick.object_count} balls`.includes(query)) ||
     (trick.siteswap?.toLowerCase().includes(query) ?? false)
   );
 }

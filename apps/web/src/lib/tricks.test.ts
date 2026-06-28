@@ -1,8 +1,10 @@
 import { describe, expect, test } from "vitest";
 import {
+  animationUrl,
   availableObjectCounts,
   bucketTricks,
   DEFAULT_TRICK_FILTERS,
+  descriptionPreview,
   filterTricks,
   missingPrerequisiteIds,
   type Trick,
@@ -14,76 +16,51 @@ const tricks: Trick[] = [
     id: "cascade",
     title: "Cascade",
     source_url: "https://example.com/cascade",
-    category: "Three Ball Patterns",
     object_count: 3,
     siteswap: "3",
     difficulty: 1,
     prerequisites: [],
-    animation_gif_url: "https://example.com/cascade.gif",
-    animation_webm_url: null,
-    animation_mp4_url: null,
-    tutorial_urls: [],
-    description_preview: "The Cascade is the most basic three ball pattern.",
+    description: "The Cascade is the most basic three ball pattern.",
   },
   {
     id: "reverse-cascade",
     title: "Reverse Cascade",
     source_url: "https://example.com/reverse-cascade",
-    category: "Three Ball Patterns",
     object_count: 3,
     siteswap: "3",
     difficulty: 2,
     prerequisites: ["cascade"],
-    animation_gif_url: null,
-    animation_webm_url: null,
-    animation_mp4_url: null,
-    tutorial_urls: [],
-    description_preview: null,
+    description: null,
   },
   {
     id: "als-slide",
     title: "Al's Slide",
     source_url: "https://example.com/als-slide",
-    category: "Three Ball Patterns",
     object_count: 3,
     siteswap: "(4x,2x)(2,4x)*",
     difficulty: 4,
     prerequisites: ["infinity"],
-    animation_gif_url: "https://example.com/als-slide.gif",
-    animation_webm_url: null,
-    animation_mp4_url: null,
-    tutorial_urls: ["https://example.com/als-slide-tutorial"],
-    description_preview: "Al's Slide is a three ball pattern.",
+    description: "Al's Slide is a three ball pattern.",
   },
   {
     id: "fountain",
     title: "Fountain",
     source_url: "https://example.com/fountain",
-    category: "Four Ball Patterns",
     object_count: 4,
     siteswap: "4",
     difficulty: 3,
     prerequisites: [],
-    animation_gif_url: null,
-    animation_webm_url: null,
-    animation_mp4_url: null,
-    tutorial_urls: [],
-    description_preview: null,
+    description: null,
   },
   {
     id: "mystery",
     title: "Mystery",
     source_url: "https://example.com/mystery",
-    category: null,
     object_count: null,
     siteswap: null,
     difficulty: null,
     prerequisites: [],
-    animation_gif_url: null,
-    animation_webm_url: null,
-    animation_mp4_url: null,
-    tutorial_urls: [],
-    description_preview: null,
+    description: null,
   },
 ];
 
@@ -125,7 +102,7 @@ describe("filterTricks", () => {
   test("filters by category query", () => {
     const filtered = filterTricks(tricks, {
       ...DEFAULT_TRICK_FILTERS,
-      query: "four ball",
+      query: "fountain",
     });
     expect(filtered.map((trick) => trick.id)).toEqual(["fountain"]);
   });
@@ -166,6 +143,22 @@ describe("filterTricks", () => {
 describe("availableObjectCounts", () => {
   test("returns sorted unique non-null object counts", () => {
     expect(availableObjectCounts(tricks)).toEqual([3, 4]);
+  });
+});
+
+describe("animationUrl", () => {
+  test("derives animation URLs from trick ID", () => {
+    expect(animationUrl(tricks[0], "webm")).toBe("/data/media/loj/cascade.webm");
+  });
+});
+
+describe("descriptionPreview", () => {
+  test("normalises and truncates descriptions in the app", () => {
+    expect(descriptionPreview("  Lots\n\nof    whitespace.  ")).toBe("Lots of whitespace.");
+    const preview = descriptionPreview("word ".repeat(100), 30);
+    expect(preview).not.toBeNull();
+    expect(preview?.endsWith("…")).toBe(true);
+    expect(preview?.length).toBeLessThanOrEqual(31);
   });
 });
 
