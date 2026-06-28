@@ -19,9 +19,5 @@ jobs:
         run: mise x -- pnpm install --frozen-lockfile
       - name: Install Python dependencies
         run: mise x -- uv sync --all-packages --frozen
-      - name: Check JS
-        run: mise x -- pnpm run check
-      - name: Typecheck
-        run: mise x -- pnpm run typecheck
-      - name: Test
-        run: mise x -- pnpm run test
+      - name: Check
+        run: mise x -- just check

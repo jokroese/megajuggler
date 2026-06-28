@@ -4,26 +4,26 @@ install:
     mise x -- uv sync --all-packages
 
 dev:
-    pnpm run dev
+    mise x -- pnpm run dev
 
 fetch-loj:
-    uv run megajuggler loj fetch
+    mise x -- uv run megajuggler loj fetch
 
 parse-loj:
-    uv run megajuggler loj parse
+    mise x -- uv run megajuggler loj parse
 
 data:
-    uv run megajuggler data build
+    mise x -- uv run megajuggler data build
 
 schema:
-    uv run megajuggler schema export
+    mise x -- uv run megajuggler schema export
 
 check:
-    pnpm run check
-    pnpm run typecheck
-    pnpm run test
+    mise x -- pnpm run check
+    mise x -- pnpm run typecheck
+    mise x -- pnpm run test
 
 fix:
-    pnpm exec biome check --write .
-    uv run ruff check --fix .
-    uv run ruff format .
+    mise x -- pnpm exec biome check --write .
+    mise x -- uv run ruff check --fix .
+    mise x -- uv run ruff format .

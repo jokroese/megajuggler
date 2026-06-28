@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+from collections.abc import Iterable
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -10,6 +11,7 @@ import typer
 from rich.progress import track
 
 from megajuggler.paths import raw_loj_dir, raw_loj_media_dir
+from megajuggler.sources.loj.models import LojMedia
 from megajuggler.sources.loj.parse import LOJ_BASE_URL, parse_homepage_links, parse_trick_page
 
 USER_AGENT = "megajuggler/0.1 (+https://github.com/jokroese/megajuggler)"
@@ -114,19 +116,13 @@ def fetch_binary_url_to_path(*, url: str, output_path: Path, force: bool = False
 
 
 def fetch_trick_media(
-    media: object, *, output_dir: Path | None = None, force: bool = False
+    media: Iterable[LojMedia], *, output_dir: Path | None = None, force: bool = False
 ) -> None:
-    if not isinstance(media, list):
-        return
-
     output_dir = output_dir or raw_loj_media_dir()
     for item in media:
-        url = getattr(item, "url", None)
-        if url is None:
-            continue
         fetch_binary_url_to_path(
-            url=str(url),
-            output_path=output_dir / url_to_media_cache_path(str(url)),
+            url=str(item.url),
+            output_path=output_dir / url_to_media_cache_path(str(item.url)),
             force=force,
         )
 
